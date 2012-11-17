@@ -452,7 +452,9 @@ color:#006;
 div > nav a[rel="prev"]:hover,
 div > nav a[rel="next"]:hover,
 div > nav a[rel="prev"]:active,
-div > nav a[rel="next"]:active
+div > nav a[rel="next"]:active,
+div > nav a[rel="prev"]:focus,
+div > nav a[rel="next"]:focus
 {
 color:#339;
 }
