@@ -4,7 +4,6 @@
  *
  * @package WordPress
  * @subpackage Typical
- * @since Typical 1.0
  */
 /** Tell WordPress to run typical_setup() when the 'after_setup_theme' hook is run. */
 add_action( 'after_setup_theme', 'typical_setup' );
