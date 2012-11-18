@@ -327,6 +327,15 @@ if($test_url !== false) {
 add_action('wp_enqueue_scripts', 'load_local_jQuery');
 }
 
+// Add required comment-reply script
+
+function theme_queue_js(){
+if ( (!is_admin()) && is_singular() && comments_open() && get_option('thread_comments') )
+  wp_enqueue_script( 'comment-reply' );
+}
+add_action('wp_print_scripts', 'theme_queue_js');
+
+
 // Custom arrow glyphs in 'read more' links
 
 function typical_more($more) {
