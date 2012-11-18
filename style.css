@@ -744,14 +744,17 @@ width:19%;
 width:79%;
 }
 
-[role="note"] p {
-text-align:left;
-}
-
 [role="note"] figure {
 padding:0 !important;
 margin-top:0.25em;
 border:0;
+}
+
+[role="note"] p {
+text-align:left;
+-moz-hyphens:none; 
+-webkit-hyphens:none;
+hyphens:none;
 }
 
 [role="note"] figure img {
@@ -1364,7 +1367,7 @@ header[role="banner"] h1 {
 text-shadow:none;
 }
 
-article p, #comments p {
+article p, #comments p, [role="note"] p {
 text-align:left;
 -moz-hyphens:none; 
 -webkit-hyphens:none;
