@@ -744,17 +744,14 @@ width:19%;
 width:79%;
 }
 
+[role="note"] p {
+text-align:left;
+}
+
 [role="note"] figure {
 padding:0 !important;
 margin-top:0.25em;
 border:0;
-}
-
-[role="note"] p {
-text-align:left;
--moz-hyphens:none; 
--webkit-hyphens:none;
-hyphens:none;
 }
 
 [role="note"] figure img {
@@ -808,11 +805,11 @@ a[rel="tag"] {
 color:#111;
 }
 
-footer i {
+[role="note"] footer i {
 display:block;
 width:100%;
 text-align:center;
-padding:0.1em 0 0;
+padding:0.25em 0 0;
 }
 
 /* COMMENTS
@@ -1367,7 +1364,7 @@ header[role="banner"] h1 {
 text-shadow:none;
 }
 
-article p, #comments p, [role="note"] p {
+article p, #comments p {
 text-align:left;
 -moz-hyphens:none; 
 -webkit-hyphens:none;
@@ -1487,7 +1484,15 @@ width:150px;
 code {
 white-space:normal !important;
 }
+    
+[role="note"] figure {
+text-align:left;      
+}
 
+[role="note"] h1 {
+font-size:1.5em !important;  
+}
+    
 }
 
 @media (max-width:400px) {
