@@ -860,6 +860,7 @@ p.logged-in-as {
 background:#ededc6;
 padding:0.5em;
 color:#111;
+margin-top:0.5em;
 }
 
 article[itemprop="comment"] {
