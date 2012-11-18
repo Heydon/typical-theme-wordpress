@@ -6,7 +6,6 @@
  * @subpackage Typical
  * @since Typical 1.0
  */
-
 /** Tell WordPress to run typical_setup() when the 'after_setup_theme' hook is run. */
 add_action( 'after_setup_theme', 'typical_setup' );
 
@@ -99,7 +98,6 @@ function typical_comment( $comment, $args, $depth ) {
 			<?php _e( '<p>Your comment is in the process of moderation.</p>', 'typical' ); ?>
 		<?php endif; ?>
 		<?php comment_text(); ?>
-
 			<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
 	</div>
 	<?php
@@ -276,8 +274,7 @@ if ( ! function_exists( 'typical_author_info' ) ) :
 					<?php 
 					$authorAvatar = get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'typical_author_bio_avatar_size', 200 ) );
 					echo $authorAvatar;  
-					?>
-					
+					?>					
 				</figure>
 			</div>
 			<div>
@@ -385,12 +382,10 @@ function typical_theme_options_page() {
     if (!current_user_can('manage_options')) {  
 		wp_die('<p>Sorry, my dear. You are not allowed to edit this particular page.</p>');  
 	} ?>
-	
 	<div class="wrap">  
 		<?php screen_icon('themes'); ?> <h2>Theme Settings For Typical</h2>
 		<p class="top-notice">Typical includes the following settings. To reconfigure the theme further, consult the functions.php file where the PHP form for setting these options is included.</p>
 		<?php
-		
 		$fontface = get_option('font-face');
 		$introductoryTitle = get_option('introductory-title');
 		$introduction = get_option('introduction');
@@ -406,7 +401,7 @@ function typical_theme_options_page() {
 			$logoImage = $_POST["logo-image"];
 			$hideIcons = $_POST["hide-icons"];
 			$footerText = trim($_POST["footer-text"]);
-			$formErrors = [];
+			$formErrors = array();
 			
 			$introduction = stripslashes($introduction);
 			$footerText = stripslashes($footerText);
@@ -435,10 +430,8 @@ function typical_theme_options_page() {
 				</div>				
 			<?php
 			}
-		}
-		
-		?>
-		
+		}		
+		?>		
 		<form method="POST" action="">  
 			<table class="form-table">  
 				<tr valign="top">  
@@ -527,9 +520,7 @@ function typical_theme_options_page() {
 			</table>
 		</form>
 	</div>
-<?php } ?> 
-
-<?php
+<?php } 
 
 // Footnotes support. Incorporate's a modified version of nacin's Simple Footnotes plugin
 // (http://wordpress.org/extend/plugins/simple-footnotes/)
