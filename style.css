@@ -55,10 +55,6 @@ background:#ffe;
 line-height:1;
 }
 
-body.logged-in {
-padding-top:36px;
-}
-
 /* LINKS
 ------------------------------- */
 
@@ -752,6 +748,7 @@ text-align:left;
 padding:0 !important;
 margin-top:0.25em;
 border:0;
+text-align:left;
 }
 
 [role="note"] figure img {
