@@ -127,11 +127,11 @@ $commenter = wp_get_current_commenter();
 $req = get_option( 'require_name_email' );
 $aria_req = ( $req ? " aria-required='true'" : '' );
 $fields =  array(
-	'author' => '<p><label for="author">' . __( 'Name' ) . '</label> ' . ( $req ? '<span>*</span>' : '' ) .
+	'author' => '<p><label for="author">' . __('Name', 'typical') . '</label> ' . ( $req ? '<span>*</span>' : '' ) .
 	'<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . ' /></p>',
-	'email'  => '<p><label for="email">' . __( 'Email' ) . '</label> ' . ( $req ? '<span>*</span>' : '' ) .
+	'email'  => '<p><label for="email">' . __('Email', 'typical') . '</label> ' . ( $req ? '<span>*</span>' : '' ) .
 	'<input id="email" name="email" type="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"' . $aria_req . ' /></p>',
-	'url'    => '<p><label for="url">' . __( 'Website' ) . '</label>' .
+	'url'    => '<p><label for="url">' . __('Website', 'typical') . '</label>' .
 	'<input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" /></p>',
 );
 return $fields;
@@ -378,13 +378,13 @@ add_action('wp_head', 'typical_favicon');
 // THEME OPTIONS
 // Don't edit beyond this point unless you're really confident
 
+add_action('admin_menu', 'setup_theme_admin_menus');
+
 function setup_theme_admin_menus() {  
    add_submenu_page('themes.php',   
         'Typical Theme Options', 'Theme Options', 'manage_options',   
         'typical-theme-options', 'typical_theme_options_page');   
-}  
-  
-add_action("admin_menu", "setup_theme_admin_menus");
+}
 
 function typical_theme_options_page() {  
     if (!current_user_can('manage_options')) {  
@@ -653,3 +653,6 @@ function typical_image_figure( $atts ) {
 	return '<figure><img src="'.$image_url.'" alt="'.$alt.'" /><figcaption>'.$caption.'</figcaption></figure>';
 }
 add_shortcode( 'image_figure', 'typical_image_figure' );
+
+// Required for theme validation
+if ( ! isset( $content_width ) ) $content_width = 900;
