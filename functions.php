@@ -527,6 +527,48 @@ function typical_theme_options_page() {
 				</tr>
 			</table>
 		</form>
+		<h2>Using Typical's shortcodes</h2>
+		
+		<p>Typical provides two shortcodes: One for making blockquotes and one for making HTML5 figures (for images only) in your posts. Below are two examples.</p>
+		
+		<p><strong>Blockquote</strong>:</p>
+		
+		<pre>
+		
+		&#x5b;blockquote quotation="Shortcodes are great!" author="Heydon Pickering" author_url="http://www.heydonworks.com"&#x5d;
+
+		// Output:
+
+		&lt;blockquote&gt;
+		   &lt;p>Shortcodes are great!&lt;/p&gt;
+		   &lt;footer&gt;
+			  &lt;a href="http://www.heydonworks.com"&gt;Heydon Pickering&lt;/a&gt;
+		   &lt;/footer&gt;
+		&lt;/blockquote&gt;
+		
+		</pre>
+		
+		<p><strong>Figure</strong>:</p>
+		
+		<pre>
+		
+		&#x5b;image_figure image_url="http://www.heydonworks.com/images/portrait.jpg" alt="Portrait of The Theme Author" caption="The Theme Author, Heydon Pickering"&#x5d;
+
+		// Output:
+
+		&lt;figure&gt;
+		   &lt;img src="http://www.heydonworks.com/images/portrait.jpg" alt="Portrait of The Theme Author"&gt;
+		   &lt;figcaption&gt;The Theme Author, Heydon Pickering&lt;/figcaption&gt;
+		&lt;/figure&gt;
+		
+		</pre>
+
+		<h2>Credits</h2>
+		
+		<p>This theme was created by <a href="http://twitter.com/heydonworks">@heydonworks</a> (<a href="http://www.heydonworks.com">http://www.heydonworks.com</a>) for Wordpress.</p>
+		
+		<p>Some of the designs in Typical's icon font were adapted from Michelle Dixon's beautiful <a href="http://www.fontsquirrel.com/fonts/Printers-Ornaments-One">Printers Ornaments One</a> typeface.</p>
+		
 	</div>
 <?php } 
 
@@ -654,5 +696,5 @@ function typical_image_figure( $atts ) {
 }
 add_shortcode( 'image_figure', 'typical_image_figure' );
 
-// Required for theme validation
+// Required for theme validation (a generic media width)
 if ( ! isset( $content_width ) ) $content_width = 900;
