@@ -9,6 +9,7 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
+
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 abbr, address, cite, code,
@@ -523,7 +524,7 @@ font-size:1.5em;
 article header div div[aria-hidden="true"] {
 font-size:2.5em;
 line-height:0;
-padding:0 0 0.75em;
+padding:0 0 0.5em;
 }
 
 article header h2, article header h1 {
@@ -1164,7 +1165,7 @@ body > div {
 padding:3em 1.5em;
 max-width:800px;
 margin:0 auto;
-  overflow:hidden;
+overflow:hidden;
 }
 
 #wpadminbar {
@@ -1227,6 +1228,10 @@ margin:0;
 .ie article header + p:first-letter, .ie div[itemprop="articleBody"] > p:first-child:first-letter {
 margin:0.125em 0.5em 0 0;
 line-height:1;
+}
+
+.lt-ie8 article header + p:first-letter, .lt-ie8 div[itemprop="articleBody"] > p:first-child:first-letter {
+margin:0 0.25em 0 0;
 }
 
 .lt-ie9 article header + figure {
@@ -1308,10 +1313,6 @@ zoom:1;
 list-style:disc inside;
 }
 
-.lt-ie8 article {
-padding-bottom:3em;
-}
-
 .lt-ie8 article header div div[aria-hidden="true"] {
 padding-bottom:0;
 visibility:hidden;
@@ -1328,7 +1329,7 @@ padding:0 0 1.5em;
 /* BREAK POINTS
 ============================================================================ */
 
-@media (max-width:1000px) {
+@media all and (max-width:1000px) {
 
 article header a[rel="external"] {
 position:static;
@@ -1352,7 +1353,9 @@ article header a[rel="external"]:active strong
 display:inline;
 }
 
-@media (max-width:640px) {
+}
+
+@media all and (max-width:640px) {
 
 html {
 margin:0;    
@@ -1390,7 +1393,8 @@ font-size:1em;
 }
 
 body > div {
-padding:1.5em 1em;    
+padding:1.5em 1em;  
+overflow:hidden;
 }
 
 header[role="banner"] {
@@ -1423,8 +1427,8 @@ max-width:100%;
 }
 
 header nav[role="navigation"] {
-width:100%;
-text-align:center;
+width:100% !important;
+text-align:center !important;
 display:block;
 }
 
@@ -1493,7 +1497,7 @@ font-size:1.5em !important;
     
 }
 
-@media (max-width:400px) {
+@media all and (max-width:500px) {
 
 h1, h2, h3, h4, dt {
 -moz-hyphens:auto;
@@ -1523,6 +1527,10 @@ margin:0 0 1.5em;
 [role="note"] div, [role="note"] p {
 width:100% !important; 
 padding:0;
+}
+
+[role="note"] p {
+padding-top:1.5em;
 }
 
 [role="note"] img {
