@@ -1495,6 +1495,14 @@ text-align:left;
 [role="note"] h1 {
 font-size:1.5em !important;  
 }
+
+article footer p > span {
+font-size:1.33em;
+}
+
+span[itemprop="keywords"] {
+display:block;
+}
     
 }
 
