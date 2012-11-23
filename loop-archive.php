@@ -11,8 +11,6 @@
 	<ul>
 
 <?php 
-	
-	query_posts('posts_per_page=-1');
 
 	if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
