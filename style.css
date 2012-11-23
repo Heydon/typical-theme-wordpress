@@ -1577,3 +1577,31 @@ line-height:1.25;
 }
 
 }
+
+/* WORDPRESS UTILITY STYLES
+============================================================================ */
+
+.sticky {
+/* for sticky posts */
+}
+
+.wp-caption, .wp-caption-text, .gallery-caption, .bypostauthor {
+font-style:italic;
+}
+
+.alignright {
+float:right;
+margin:0 0 1.5em 1.5em;
+}
+
+.alignleft {
+float:left;
+margin:0 1.5em 1.5em 0;
+}
+
+.aligncenter {
+display:block;
+margin:1.5em auto;
+}
+
+

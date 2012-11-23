@@ -307,25 +307,13 @@ if ( ! function_exists( 'typical_post_thumb_figure' ) ) :
 	}
 endif; 
 
-// Load CDN jquery if live and local jquery if not:
+// Load CDN jquery:
 
-$url = 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js';
-$test_url = @fopen($url,'r');
-if($test_url !== false) {
-    function load_external_jQuery() { 
-        wp_deregister_script( 'jquery' ); 
-        wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js');
-        wp_enqueue_script('jquery');
-    }  
-    add_action('wp_enqueue_scripts', 'load_external_jQuery');
-} else {  
-    function load_local_jQuery() {  
-        wp_deregister_script('jquery');
-        wp_register_script('jquery', bloginfo('template_url').'/js/jquery-1.8.1.min.js', __FILE__, false, '1.6.4', true); // register the local file  
-        wp_enqueue_script('jquery');
-    }  
-add_action('wp_enqueue_scripts', 'load_local_jQuery');
-}
+function load_external_jQuery() {  
+	wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js');
+	wp_enqueue_script('jquery');
+}  
+add_action('wp_enqueue_scripts', 'load_external_jQuery');
 
 // Add required comment-reply script
 
@@ -334,7 +322,6 @@ if ( (!is_admin()) && is_singular() && comments_open() && get_option('thread_com
   wp_enqueue_script( 'comment-reply' );
 }
 add_action('wp_print_scripts', 'theme_queue_js');
-
 
 // Custom arrow glyphs in 'read more' links
 
@@ -696,5 +683,5 @@ function typical_image_figure( $atts ) {
 }
 add_shortcode( 'image_figure', 'typical_image_figure' );
 
-// Required for theme validation (a generic media width)
+// Required for theme validation (a default media width)
 if ( ! isset( $content_width ) ) $content_width = 900;
