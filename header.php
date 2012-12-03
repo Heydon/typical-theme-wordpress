@@ -31,7 +31,7 @@
  
     ?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <?php
 // SET THE FONT FAMILY FROM THEME OPTIONS
 $fontfamily = get_option('font-face');
@@ -50,7 +50,7 @@ if ($fontfamily != null) { ?>
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
  <!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<script src="<?php bloginfo('stylesheet_directory'); ?>/js/selectivizr-min.js"></script>
+	<script src="<?php get_stylesheet_directory_uri(); ?>/js/selectivizr-min.js"></script>
  <![endif]-->
 <?php wp_head(); ?>
 </head>
@@ -62,7 +62,7 @@ if ($fontfamily != null) { ?>
 			
 			if ($logo != null) { ?>
 			<hgroup>
-				<h1 class="with-image"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><span><?php bloginfo( 'name' ); ?></span><img src="<?php bloginfo('stylesheet_directory'); ?>/images/custom-logo.png" alt="" /></a></h1>
+				<h1 class="with-image"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><span><?php bloginfo( 'name' ); ?></span><img src="<?php get_stylesheet_directory_uri(); ?>/images/custom-logo.png" alt="" /></a></h1>
 				<h2><?php bloginfo( 'description' ); ?></h2>
 			</hgroup>
 			<?php } else { ?>

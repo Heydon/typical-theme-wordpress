@@ -23,10 +23,10 @@ function typical_setup() {
 
 	// Make theme available for translation
 	// Translations can be filed in the /languages/ directory
-	load_theme_textdomain( 'typical', TEMPLATEPATH . '/languages' );
+	load_theme_textdomain( 'typical', get_template_directory(). '/languages' );
 
 	$locale = get_locale();
-	$locale_file = TEMPLATEPATH . "/languages/$locale.php";
+	$locale_file = get_template_directory(). "/languages/$locale.php";
 	if ( is_readable( $locale_file ) )
 		require_once( $locale_file );
 
@@ -38,15 +38,6 @@ function typical_setup() {
 endif;
 
 if ( ! function_exists( 'typical_menu' ) ):
-/**
- * Set our wp_nav_menu() fallback, typical_menu().
- */
-// function typical_menu() {
-	// echo '<nav role="navigation"><h2>Pages and Blog Categories</h2><div></div><ul><li><a href="'.get_bloginfo('url').'">Home<span aria-hidden="true">u</span></a></li>';
-	// wp_list_pages('title_li=&link_after=<span aria-hidden="true">u</span>');
-	// wp_list_categories('title_li=');
-	// echo '</ul><div></div></nav>';
-// }
 
 function typical_menu() {
 $typical_pages = get_pages();
@@ -347,7 +338,7 @@ add_filter('user_contactmethods','my_new_contactmethods',10,1);
 // Add the Typical default avatar
 
 function typical_avatar($avatar_defaults) {
-	$myavatar = get_bloginfo('stylesheet_directory').'/images/avatar.png';
+	$myavatar = get_stylesheet_directory_uri().'/images/avatar.png';
 	$avatar_defaults[$myavatar] = 'Typical Resolution Independent Default';
 	return $avatar_defaults;
 }
@@ -357,7 +348,7 @@ add_filter('avatar_defaults', 'typical_avatar');
 // Add a favicon
 
 function typical_favicon() { ?>
-    <link rel="shortcut icon" href="<?php echo bloginfo('stylesheet_directory') ?>/images/favicon.png" />
+    <link rel="shortcut icon" href="<?php get_stylesheet_directory_uri(); ?>/images/favicon.png" />
 <?php }
 add_action('wp_head', 'typical_favicon');
 
@@ -369,9 +360,7 @@ add_action('wp_head', 'typical_favicon');
 add_action('admin_menu', 'setup_theme_admin_menus');
 
 function setup_theme_admin_menus() {  
-   add_submenu_page('themes.php',   
-        'Typical Theme Options', 'Theme Options', 'manage_options',   
-        'typical-theme-options', 'typical_theme_options_page');   
+   add_theme_page('Typical Theme Options', 'Theme Options', 'read', 'typical-theme-options', 'typical_theme_options_page');
 }
 
 function typical_theme_options_page() {  
@@ -556,6 +545,8 @@ function typical_theme_options_page() {
 		<p>This theme was created by <a href="http://twitter.com/heydonworks">@heydonworks</a> (<a href="http://www.heydonworks.com">http://www.heydonworks.com</a>) for Wordpress.</p>
 		
 		<p>Some of the designs in Typical's icon font were adapted from Michelle Dixon's beautiful <a href="http://www.fontsquirrel.com/fonts/Printers-Ornaments-One">Printers Ornaments One</a> typeface.</p>
+		
+		<p>Typical incorporates <a href="http://profiles.wordpress.org/nacin/">Andrew Nacin</a>'s excellent <a href="http://wordpress.org/extend/plugins/simple-footnotes/">Simple Footnotes</a> plugin natively.</p>
 		
 	</div>
 <?php } 
