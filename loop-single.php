@@ -9,7 +9,8 @@
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
-		<nav>
+		<nav class="prev-and-next">
+			<h1>Previous And Next Post Navigation</h1>
 			<?php
 				$prev_post = get_previous_post();
 				if($prev_post) {

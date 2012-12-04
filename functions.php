@@ -43,7 +43,7 @@ function typical_menu() {
 $typical_pages = get_pages();
 $typical_cats = get_categories();
 
-	echo '<nav role="navigation"><h1>Pages and Blog Categories</h1><ul>';
+	echo '<nav role="navigation"><h1>Pages and Blog Categories Navigation</h1><ul>';
 	foreach ( $typical_pages as $typical_page ) {
 		$page = '<li><a href="' . get_page_link( $typical_page->ID ) . '">';
 		$page .= $typical_page->post_title;
@@ -348,7 +348,7 @@ add_filter('avatar_defaults', 'typical_avatar');
 // Add a favicon
 
 function typical_favicon() { ?>
-    <link rel="shortcut icon" href="<?php get_stylesheet_directory_uri(); ?>/images/favicon.png" />
+    <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/images/favicon.png" />
 <?php }
 add_action('wp_head', 'typical_favicon');
 
@@ -360,7 +360,7 @@ add_action('wp_head', 'typical_favicon');
 add_action('admin_menu', 'setup_theme_admin_menus');
 
 function setup_theme_admin_menus() {  
-   add_theme_page('Typical Theme Options', 'Theme Options', 'read', 'typical-theme-options', 'typical_theme_options_page');
+   add_theme_page('Typical Theme Options', 'Theme Options', 'edit_theme_options', 'typical-theme-options', 'typical_theme_options_page');
 }
 
 function typical_theme_options_page() {  

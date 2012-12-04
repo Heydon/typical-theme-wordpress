@@ -355,6 +355,13 @@ overflow:hidden;
 padding:0;
 }
 
+nav.prev-and-next h1 {
+margin:0;
+padding:0;
+height:0;
+overflow:hidden;
+}
+
 header[role="banner"] hgroup {
 font-size:0.66em;
 padding:0 0 1.5em;
