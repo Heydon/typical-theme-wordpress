@@ -275,7 +275,7 @@ if ( ! function_exists( 'typical_author_info' ) ) :
 					<small>
 						<a itemprop="url" href="<?php the_author_meta( 'user_url' ); ?>"><span aria-hidden="true">S</span> <i>The author's website</i></a> 
 						<a href="<?php the_author_meta( 'twitter' ); ?>"><span aria-hidden="true">T</span> <i>The author's Twitter</i></a> 
-						<a href="<?php the_author_meta( 'google' ); ?>?rel=author"><span aria-hidden="true">G</span> <i>The author's Google<sup>+</sup></i></a>
+						<a href="<?php the_author_meta( 'google' ); ?>" rel="me"><span aria-hidden="true">G</span> <i>The author's Google<sup>+</sup></i></a>
 					</small>
 				</p>
 			</footer>
