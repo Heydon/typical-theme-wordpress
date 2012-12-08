@@ -821,6 +821,10 @@ padding:0.25em 0 0;
 /* COMMENTS
 ============================================================================ */
 
+section[itemtype="http://schema.org/UserComments"] {
+padding-top:1.5em; 
+}
+
 #respond {
 background:#111;
 color:#ffe;
@@ -917,6 +921,16 @@ padding-top:0;
 
 figure div[aria-hidden="true"] {
 font-size:4.5em;
+}
+
+.comment .comment {
+margin-top:1.5em;  
+}
+
+div[itemprop="commentText"] a.comment-reply-link {
+padding:0.25em;
+font-size:1em;
+margin:0.5em 0 0;
 }
 
 /* ARCHIVES
@@ -1064,7 +1078,9 @@ padding:0 0 1.5rem;
 /* APPLICATION / FORM STYLES
 ============================================================================ */
 
-a[role="button"], a.post-edit-link, p input[type="submit"], #searchform input[type="submit"], a[aria-pressed="false"] {
+a[role="button"], a.post-edit-link, p input[type="submit"], 
+#searchform input[type="submit"], a[aria-pressed="false"], 
+a[onclick] {
 display:inline-block !important;
 background:#64AF57;
 color:#ffe;
@@ -1090,7 +1106,8 @@ padding:0.25em 0.5em;
 a[role="button"]:hover,
 a.post-edit-link:hover,
 p input[type="submit"]:hover, 
-#searchform input[type="submit"]:hover {
+#searchform input[type="submit"]:hover, 
+a[onclick]:hover {
 border-width:0 2px 2px 0;
 }
 
@@ -1100,7 +1117,9 @@ a.post-edit-link:active,
 a.post-edit-link:focus, 
 p input[type="submit"]:focus, 
 #searchform input[type="submit"]:focus,
-[aria-pressed="true"] {
+[aria-pressed="true"], 
+a[onclick]:active, 
+a[onclick]:focus {
 border-width:0 2px 2px 0;
 box-shadow:2px 2px 0 #528F47;
 position:relative;
@@ -1592,8 +1611,12 @@ line-height:1.25;
 /* for sticky posts */
 }
 
-.wp-caption, .wp-caption-text, .gallery-caption, .bypostauthor {
+.wp-caption, .wp-caption-text, .gallery-caption {
 font-style:italic;
+}
+
+.bypostauthor {
+/* unique styles for post author comments */
 }
 
 .alignright {
@@ -1611,4 +1634,7 @@ display:block;
 margin:1.5em auto;
 }
 
+.comment .comment {
+margin-top:1.5em;  
+}
 
