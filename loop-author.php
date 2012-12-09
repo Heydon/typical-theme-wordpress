@@ -37,3 +37,20 @@
 	</article>
 	
 <?php endwhile; // end of the loop. ?>
+
+<?php if ( $wp_query->max_num_pages > 1 ) : ?>
+	<nav>
+        <?php 
+		if(get_previous_posts_link()) {
+			previous_posts_link( __( '<span aria-hidden="true">&#x2190;</span> Newer posts', 'typical' ) );
+		} else { ?>
+			<a rel="prev" href="#no"><span aria-hidden="true">&#x2190;</span> Newer posts</a>
+		<?php } 
+		if(get_next_posts_link()) {
+			next_posts_link( __( 'Older posts <span aria-hidden="true">&#x2192;</span>', 'typical' ) );
+		} else { ?>
+			<a rel="next" href="#no">Older posts <span aria-hidden="true">&#x2192;</span></a>
+		<?php } 
+		?>
+	</nav>
+<?php endif; ?>

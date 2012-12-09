@@ -677,3 +677,15 @@ add_shortcode( 'image_figure', 'typical_image_figure' );
 
 // Required for theme validation (a default media width)
 if ( ! isset( $content_width ) ) $content_width = 900;
+
+// Add rel attr to previous posts and next posts 
+
+function previous_posts_link_css($content) {
+	return 'rel="prev"';
+}
+add_filter('previous_posts_link_attributes', 'previous_posts_link_css' );
+
+function next_posts_link_css($content) {
+	return 'rel="next"';
+}
+add_filter('next_posts_link_attributes', 'next_posts_link_css' );

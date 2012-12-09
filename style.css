@@ -436,17 +436,23 @@ top:0.1em;
 /* PREV AND NEXT
 --------------------- */
 
-div > nav {
+div > nav, section[role="main"] > nav {
 margin:-3em 0 1.5em;
 position:relative;
 height:2em;
 }
 
-div > nav a span, div > nav a span {
+section[role="main"] > nav {
+margin:1.5em 0 0;
+}
+
+div > nav a span, section[role="main"] > nav a span {
 vertical-align:middle;
 font-size:2em;
 }
 
+section[role="main"] > nav a[rel="prev"],
+section[role="main"] > nav a[rel="next"],
 div > nav a[rel="prev"],
 div > nav a[rel="next"] {
 position:absolute;
@@ -454,17 +460,28 @@ top:0;
 color:#006;
 }
 
+section[role="main"] > nav a[rel="prev"], 
+div > nav a[rel="prev"] {
+z-index:999;
+}
+
 div > nav a[rel="prev"]:hover,
 div > nav a[rel="next"]:hover,
 div > nav a[rel="prev"]:active,
 div > nav a[rel="next"]:active,
 div > nav a[rel="prev"]:focus,
-div > nav a[rel="next"]:focus
+div > nav a[rel="next"]:focus,
+section[role="main"] > nav a[rel="prev"]:hover,
+section[role="main"] > nav a[rel="next"]:hover,
+section[role="main"] > nav a[rel="prev"]:active,
+section[role="main"] > nav a[rel="next"]:active,
+section[role="main"] > nav a[rel="prev"]:focus,
+section[role="main"] > nav a[rel="next"]:focus
 {
 color:#339;
 }
 
-nav a[rel="prev"] {
+nav a {
 left:0;
 }
 
@@ -936,7 +953,7 @@ margin:0.5em 0 0;
 /* ARCHIVES
 ============================================================================ */
 
-.category div > h1 {
+.category section > h1 {
 text-indent:0.8em;
 }
 

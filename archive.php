@@ -13,7 +13,7 @@ get_header(); ?>
 	if ( have_posts() )
 		the_post();
 ?>
-
+		<section role="main">
 			<h1>
 <?php if ( is_day() ) : ?>
 				<?php printf( __( '<span aria-hidden="true">&#x274F;</span> %s', 'typical' ), get_the_date() ); ?>
@@ -25,12 +25,11 @@ get_header(); ?>
 				<?php _e( 'Archives', 'typical' ); ?>
 <?php endif; ?>
 			</h1>
-
 <?php
 	rewind_posts();
 
 	get_template_part( 'loop', 'archive' );
 ?>
-
+		</section>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
