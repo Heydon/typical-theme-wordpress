@@ -30,6 +30,7 @@
 		<?php } ?>
 		
 		<?php
+			$hideClass = '';
 			$hide = get_option('hide-icons');
 			if ($hide != null) {
 				$hideClass = ' class="hide"';

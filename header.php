@@ -40,7 +40,7 @@ if ($fontfamily != null) { ?>
 	<link href='http://fonts.googleapis.com/css?family=<?php echo $fontfamily ?>:400,700,400italic' rel='stylesheet' type='text/css'>
 	<style type="text/css">
 		body {
-			font-family: '<?php echo str_replace('+', ' ', $fontfamily) ?>', serif;
+			font-family: '<?php echo str_replace('+', ' ', $fontfamily) ?>', serif !important;
 		}
 	</style>
 	<?php } else {?>
@@ -50,7 +50,7 @@ if ($fontfamily != null) { ?>
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
  <!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<script src="<?php get_stylesheet_directory_uri(); ?>/js/selectivizr-min.js"></script>
+	<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/selectivizr-min.js"></script>
  <![endif]-->
 <?php wp_head(); ?>
 </head>
