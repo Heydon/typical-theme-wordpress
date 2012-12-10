@@ -950,6 +950,17 @@ font-size:1em;
 margin:0.5em 0 0;
 }
 
+nav.comment-pagination {
+padding:1.5em 0;
+text-align:center;
+}
+
+nav.comment-pagination h2 {
+font-size:1.25em;
+padding:0 0 0.25em;
+text-transform:none;
+}
+
 /* ARCHIVES
 ============================================================================ */
 
@@ -1654,4 +1665,5 @@ margin:1.5em auto;
 .comment .comment {
 margin-top:1.5em;  
 }
+
 

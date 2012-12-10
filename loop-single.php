@@ -65,7 +65,7 @@
 				?>
 					
 			</article>
-			<section itemscope itemtype="http://schema.org/UserComments">
+			<section id="comments" itemscope itemtype="http://schema.org/UserComments">
 				<?php comments_template( '', true ); ?>
 			</section>
 		</div>

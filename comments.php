@@ -35,12 +35,19 @@
 				<?php
 					wp_list_comments( array( 'style' => 'div', 'callback' => 'typical_comment', 'end-callback' => 'typical_comment_close' ) );
 				?>
+				
+				<?php if(get_comments_number() > get_option('comments_per_page')) : ?>
+					<nav class="comment-pagination">
+						<h2>More comments &hellip;</h2>
+						<?php paginate_comments_links(); ?>
+					</nav>
+				<?php endif; ?>
 
 <?php else : // or, if we don't have comments:
 
 	if ( ! comments_open() ) :
 ?>
-	<p><?php _e( 'Comments are closed.', 'typical' ); ?></p>
+	<p><?php _e( '<p>Comments are closed.</p>', 'typical' ); ?></p>
 <?php endif; // end ! comments_open() ?>
 
 <?php endif; // end have_comments() ?>
