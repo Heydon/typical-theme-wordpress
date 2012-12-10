@@ -62,7 +62,7 @@ if ($fontfamily != null) { ?>
 			
 			if ($logo != null) { ?>
 			<hgroup>
-				<h1 class="with-image"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><span><?php bloginfo( 'name' ); ?></span><img src="<?php get_stylesheet_directory_uri(); ?>/images/custom-logo.png" alt="" /></a></h1>
+				<h1 class="with-image"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><span><?php bloginfo( 'name' ); ?></span><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/custom-logo.png" alt="" /></a></h1>
 				<h2><?php bloginfo( 'description' ); ?></h2>
 			</hgroup>
 			<?php } else { ?>
