@@ -359,20 +359,22 @@ function typical_theme_options_page() {
 		<?php screen_icon('themes'); ?> <h2>Theme Settings For Typical</h2>
 		<p class="top-notice">Typical includes the following settings. To reconfigure the theme further, consult the functions.php file where the PHP form for setting these options is included.</p>
 		<?php
+		
 		$fontface = get_option('font-face');
 		$introductoryTitle = get_option('introductory-title');
 		$introduction = get_option('introduction');
-		$logoImage = (isset(get_option('logo-image')) ? get_option('logo-image') : null;
+		$logoImage = get_option('logo-image');
 		$footerText = get_option('footer-text');
-		$hideIcons = (isset(get_option('hide-icons')) ? get_option('hide-icons') : null;
+		$hideIcons = get_option('hide-icons');
 		
 		if ( isset($_POST["update_settings"]) ) {
 			$fontface = $_POST["font-face"];
 			$introductoryTitle = htmlspecialchars($_POST["introductory-title"]);
 			$introductoryTitle = trim($introductoryTitle);
 			$introduction = trim($_POST["introduction"]);
-			$logoImage = $_POST["logo-image"];
-			$hideIcons = $_POST["hide-icons"];
+			$logoImage = isset($_POST["logo-image"]) ? $_POST["logo-image"] : null;
+			$hideIcons = isset($_POST["hide-icons"]) ? $_POST["hide-icons"] : null;
+			
 			$footerText = trim($_POST["footer-text"]);
 			$formErrors = array();
 			
