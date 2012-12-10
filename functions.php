@@ -8,36 +8,33 @@
 /** Tell WordPress to run typical_setup() when the 'after_setup_theme' hook is run. */
 add_action( 'after_setup_theme', 'typical_setup' );
 
-if ( ! function_exists( 'typical_setup' ) ):
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- */
-function typical_setup() {
+if ( !function_exists( 'typical_setup' ) ):
+// Sets up theme defaults and registers support for various WordPress features
 
-	// This theme uses post thumbnails
-	add_theme_support( 'post-thumbnails' );
-	add_image_size( 'Typical Thumbnail', 600, 600, true );
+	function typical_setup() {
 
-	// Add default posts and comments RSS feed links to head
-	add_theme_support( 'automatic-feed-links' );
+		// This theme uses post thumbnails
+		add_theme_support( 'post-thumbnails' );
+		add_image_size( 'Typical Thumbnail', 600, 600, true );
 
-	// Make theme available for translation
-	// Translations can be filed in the /languages/ directory
-	load_theme_textdomain( 'typical', get_template_directory(). '/languages' );
+		// Add default posts and comments RSS feed links to head
+		add_theme_support( 'automatic-feed-links' );
 
-	$locale = get_locale();
-	$locale_file = get_template_directory(). "/languages/$locale.php";
-	if ( is_readable( $locale_file ) )
-		require_once( $locale_file );
+		// Make theme available for translation
+		// Translations can be filed in the /languages/ directory
+		load_theme_textdomain( 'typical', get_template_directory(). '/languages' );
 
-	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus( array(
-		'primary' => __( 'Primary Navigation', 'typical' ),
-	) );
+		$locale = get_locale();
+		$locale_file = get_template_directory(). "/languages/$locale.php";
+		if ( is_readable( $locale_file ) )
+			require_once( $locale_file );
+
+		// This theme uses wp_nav_menu() in one location.
+		register_nav_menus( array( 'primary' => __( 'Primary Navigation', 'typical' ),) );
 }
 endif;
 
-if ( ! function_exists( 'typical_menu' ) ):
+if ( !function_exists('typical_menu') ):
 
 function typical_menu() {
 $typical_pages = get_pages();
@@ -62,57 +59,54 @@ $typical_cats = get_categories();
 }
 endif;
 
-if ( ! function_exists( 'typical_comment' ) ) :
-/**
- * Template for comments and pingbacks.
- */
-function typical_comment( $comment, $args, $depth ) {
-	$GLOBALS['comment'] = $comment;
-	switch ( $comment->comment_type ) :
-		case '' :
-	?>
-	<article itemprop="comment" <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
-		<figure>
-			<?php echo get_avatar( $comment, 200 ); ?>
-		</figure>
-	<div itemprop="commentText">
-			<h4>
-				<?php printf( __( '%s', 'typical' ), sprintf( '%s', get_comment_author_link() ) );
-				/* translators: 1: date, 2: time */
-				?> 
-				<time itemprop="commentTime" datetime="<?php comment_date('Y-m-d'); ?>"><span aria-hidden="true">&#x274F;</span> 
-						<?php printf( __( '%1$s', 'typical' ), get_comment_date('d M Y')) ?>
-				</time>
-			</h4>
-		<?php if ( $comment->comment_approved == '0' ) : ?>
-			<?php _e( '<p>Your comment is in the process of moderation.</p>', 'typical' ); ?>
-		<?php endif; ?>
-		<?php comment_text(); ?>
-			<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-	</div>
-	<?php
-			break;
-		case 'pingback'  :
-		case 'trackback' :
-	?>
-	<article <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
-		<p itemprop="commentText"><?php _e( 'Pingback:', 'typical' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __('(Edit)', 'typical'), ' ' ); ?></p>
-	<?php
-			break;
-	endswitch;
-}
+if ( !function_exists( 'typical_comment' ) ) :
+// Template for comments and pingbacks
+ 
+	function typical_comment( $comment, $args, $depth ) {
+		$GLOBALS['comment'] = $comment;
+		switch ( $comment->comment_type ) :
+			case '' :
+		?>
+		<article itemprop="comment" <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
+			<figure>
+				<?php echo get_avatar( $comment, 200 ); ?>
+			</figure>
+		<div itemprop="commentText">
+				<h4>
+					<?php printf( __( '%s', 'typical' ), sprintf( '%s', get_comment_author_link() ) );
+					/* translators: 1: date, 2: time */
+					?> 
+					<time itemprop="commentTime" datetime="<?php comment_date('Y-m-d'); ?>"><span aria-hidden="true">&#x274F;</span> 
+							<?php printf( __( '%1$s', 'typical' ), get_comment_date('d M Y')) ?>
+					</time>
+				</h4>
+			<?php if ( $comment->comment_approved == '0' ) : ?>
+				<?php _e( '<p>Your comment is in the process of moderation.</p>', 'typical' ); ?>
+			<?php endif; ?>
+			<?php comment_text(); ?>
+				<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+		</div>
+		<?php
+				break;
+			case 'pingback'  :
+			case 'trackback' :
+		?>
+		<article <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
+			<p itemprop="commentText"><?php _e( 'Pingback:', 'typical' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __('(Edit)', 'typical'), ' ' ); ?></p>
+		<?php
+				break;
+		endswitch;
+	}
 endif;
 
-/**
- * Closes comments and pingbacks with </article> instead of </li>.
- */
+// Closes comments and pingbacks with </article> instead of </li>.
+
 function typical_comment_close() {
 	echo '</article>';
 }
 
-/**
- * Adjusts the comment_form() input types for HTML5.
-*/
+// Adjusts the comment_form() input types for HTML5.
+
 function typical_fields($fields) {
 $commenter = wp_get_current_commenter();
 $req = get_option( 'require_name_email' );
@@ -145,22 +139,20 @@ function typical_widgets_init() {
 	) );
 }
 
-/** Register sidebars by running typical_widgets_init() on the widgets_init hook. */
+// Register sidebars by running typical_widgets_init() on the widgets_init hook
 add_action( 'widgets_init', 'typical_widgets_init' );
 
-/**
- * Removes the default styles that are packaged with the Recent Comments widget.
- */
+
+// Removes the default styles that are packaged with the Recent Comments widget
 function typical_remove_recent_comments_style() {
 	add_filter( 'show_recent_comments_widget_style', '__return_false' );
 }
 add_action( 'widgets_init', 'typical_remove_recent_comments_style' );
 
 if ( ! function_exists( 'typical_posted_on' ) ) :
-/**
- * Prints HTML with meta information for the current post—date/time and author.
 
- */
+// Prints HTML with meta information for the current post—date/time and author
+
 function typical_posted_on() {
 	printf( __( '<div>%2$s by %3$s', 'typical' ),
 		'meta-prep meta-prep-author',
@@ -189,18 +181,16 @@ function typical_posted_on() {
 		?>
 		<a rel="external" target="_blank" title="Save to read later with Instapaper.com" href="http://www.instapaper.com/hello2?url=<?php echo $theURL; ?>&title=<?php echo $theTitle; ?>"><span aria-hidden="true">&#x21B4;</span> <strong>Read later</strong></a>
 		</div>
-	<?php 
-	} ?>
+	<?php } ?>
 	<div aria-hidden="true">&#x2014;</div>
 	</div>
 	<?php }
 endif;
 
 if ( ! function_exists( 'typical_author_posted_on' ) ) :
-/**
- * Prints HTML with meta information for the current post—date/time and author.
 
- */
+// Prints HTML with meta information for the current post—date/time and author.
+
 function typical_author_posted_on() {
 	printf( __( '<div>Posted on %2$s', 'typical' ),
 		'meta-prep meta-prep-author',
@@ -215,9 +205,9 @@ function typical_author_posted_on() {
 endif;
 
 if ( ! function_exists( 'typical_posted_in' ) ) :
-/**
- * Prints HTML with meta information for the current post (category, tags and permalink).
- */
+
+// Prints HTML with meta information for the current post (category, tags and permalink)
+
 function typical_posted_in() {
 	// Retrieves tag list of current post, separated by commas.
 	$tag_list = get_the_tag_list( '<span itemprop="keywords">', '<sup aria-hidden="true">&#x25C6;</sup></span><span itemprop="keywords">','<sup aria-hidden="true">&#x25C6;</sup></span>');
@@ -318,7 +308,7 @@ add_action('wp_print_scripts', 'theme_queue_js');
 // Custom arrow glyphs in 'read more' links
 
 function typical_more($more) {
-       global $post;
+    global $post;
 	return '&hellip; <a href="'. get_permalink($post->ID) . '" rel="bookmark" itemprop="url"> read more <span aria-hidden="true">&#x2192;</span></a>';
 }
 add_filter('excerpt_more', 'typical_more');
@@ -352,8 +342,6 @@ function typical_favicon() { ?>
 <?php }
 add_action('wp_head', 'typical_favicon');
 
-
-
 // THEME OPTIONS
 // Don't edit beyond this point unless you're really confident
 
@@ -374,11 +362,11 @@ function typical_theme_options_page() {
 		$fontface = get_option('font-face');
 		$introductoryTitle = get_option('introductory-title');
 		$introduction = get_option('introduction');
-		$logoImage = get_option('logo-image');
+		$logoImage = (isset(get_option('logo-image')) ? get_option('logo-image') : null;
 		$footerText = get_option('footer-text');
-		$hideIcons = get_option('hide-icons');
+		$hideIcons = (isset(get_option('hide-icons')) ? get_option('hide-icons') : null;
 		
-		if (isset($_POST["update_settings"])) {
+		if ( isset($_POST["update_settings"]) ) {
 			$fontface = $_POST["font-face"];
 			$introductoryTitle = htmlspecialchars($_POST["introductory-title"]);
 			$introductoryTitle = trim($introductoryTitle);
@@ -391,7 +379,7 @@ function typical_theme_options_page() {
 			$introduction = stripslashes($introduction);
 			$footerText = stripslashes($footerText);
 			
-			if (!empty($formErrors)) {
+			if ( !empty($formErrors) ) {
 				foreach($formErrors as $error) { ?>
 					<div class="error below-h2">
 						<p><?php echo $error; ?></p>
@@ -399,7 +387,7 @@ function typical_theme_options_page() {
 			<?php
 				}
 			} else {
-				if (empty($introductoryTitle)) {
+				if ( empty($introductoryTitle) ) {
 					$introductoryTitle = 'Introduction';
 				}
 				
@@ -427,12 +415,12 @@ function typical_theme_options_page() {
 					</th>  
 					<td>  
 						<select id="font-face" name="font-face">
-							<option value="Averia+Serif+Libre" <?php if ($fontface == 'Averia+Serif+Libre') {?>selected="selected"<?php } ?>>Averia Serif Libre</option>
-							<option value="Vollkorn" <?php if ($fontface == 'Vollkorn') {?>selected="selected"<?php } ?>>Vollkorn</option>
-							<option value="Neuton" <?php if ($fontface == 'Neuton') {?>selected="selected"<?php } ?>>Neuton</option>
-							<option value="PT+Serif" <?php if ($fontface == 'PT+Serif') {?>selected="selected"<?php } ?>>PT Serif</option>
-							<option value="Cardo" <?php if ($fontface == 'Cardo') {?>selected="selected"<?php } ?>>Cardo</option>
-							<option value="Gentium+Book+Basic" <?php if ($fontface == 'Gentium+Book+Basic') {?>selected="selected"<?php } ?>>Gentium Book Basic</option>
+							<option value="Averia+Serif+Libre" <?php if ( $fontface == 'Averia+Serif+Libre' ) {?>selected="selected"<?php } ?>>Averia Serif Libre</option>
+							<option value="Vollkorn" <?php if ( $fontface == 'Vollkorn' ) {?>selected="selected"<?php } ?>>Vollkorn</option>
+							<option value="Neuton" <?php if ( $fontface == 'Neuton' ) {?>selected="selected"<?php } ?>>Neuton</option>
+							<option value="PT+Serif" <?php if ( $fontface == 'PT+Serif' ) {?>selected="selected"<?php } ?>>PT Serif</option>
+							<option value="Cardo" <?php if ( $fontface == 'Cardo' ) {?>selected="selected"<?php } ?>>Cardo</option>
+							<option value="Gentium+Book+Basic" <?php if ( $fontface == 'Gentium+Book+Basic' ) {?>selected="selected"<?php } ?>>Gentium Book Basic</option>
 						</select>
 						<span style="display:block" class="description">Each family includes 400, 400 italic and 700 faces and is served from Google Web Fonts.</span>
 					</td>  
@@ -466,7 +454,7 @@ function typical_theme_options_page() {
 						</label>   
 					</th>  
 					<td>  
-						<input type="checkbox" name="logo-image" id="logo-image" value="Yes" <?php if ($logoImage != null) { echo 'checked="checked"'; } ?> />
+						<input type="checkbox" name="logo-image" id="logo-image" value="Yes" <?php if ( $logoImage != null ) { echo 'checked="checked"'; } ?> />
 						<span style="display:block" class="description">Check if you wish to use an image / logo for your site title.<br/> The text version of the name will be accessibly hidden. <br/>You must place the image in the theme's <strong>images</strong> folder and name it <strong>custom-logo.png</strong>.</span>
 					</td>
 				</tr>
@@ -488,7 +476,7 @@ function typical_theme_options_page() {
 						</label>
 					</th>  
 					<td>  
-						<input type="checkbox" name="hide-icons" id="hide-icons" value="Yes" <?php if ($hideIcons != null) { echo 'checked="checked"'; } ?> />
+						<input type="checkbox" name="hide-icons" id="hide-icons" value="Yes" <?php if ( $hideIcons != null ) { echo 'checked="checked"'; } ?> />
 						<span style="display:block" class="description">Check to hide the Wordpress and Heydonworks (theme author) icons in your footer.</span>
 					</td>  
 				</tr>
@@ -555,7 +543,7 @@ function typical_theme_options_page() {
 // (http://wordpress.org/extend/plugins/simple-footnotes/)
 
 function load_footnote_support() {
-	if (!class_exists('nacin_footnotes')) {
+	if ( !class_exists('nacin_footnotes') ) {
         /*
 		 * Author: Andrew Nacin
 		 * Author URI: http://andrewnacin.com/
