@@ -36,30 +36,30 @@ endif;
 
 if ( !function_exists('typical_menu') ):
 
-function typical_menu() {
-$typical_pages = get_pages();
-$typical_cats = get_categories();
-
-	echo '<nav role="navigation"><h1>Pages and Blog Categories Navigation</h1><ul>';
-	foreach ( $typical_pages as $typical_page ) {
-		$page = '<li><a href="' . get_page_link( $typical_page->ID ) . '">';
-		$page .= $typical_page->post_title;
-		$page .= '</a></li>';
-		echo $page;
+	function typical_menu() {
+		$typical_pages = get_pages();
+		$typical_cats = get_categories();
+		echo '<nav role="navigation"><h1>Pages and Blog Categories Navigation</h1><ul>';
+		foreach ( $typical_pages as $typical_page ) {
+			$page = '<li><a href="' . get_page_link( $typical_page->ID ) . '">';
+			$page .= $typical_page->post_title;
+			$page .= '</a></li>';
+			echo $page;
+		}
+		echo '</ul><ul>';
+		foreach ( $typical_cats as $typical_cat ) {
+			$cat = '<li><a href="' . get_category_link( $typical_cat->term_id ) . '"><span aria-hidden="true">&#x270E;</span> ';
+			$cat .= $typical_cat->cat_name;
+			$cat .= '<sup>'. $typical_cat->category_count .'</sup>';
+			$cat .= '</a></li>';
+			echo $cat;
+		}
+		echo '</ul></nav>';
 	}
-	echo '</ul><ul>';
-	foreach ( $typical_cats as $typical_cat ) {
-		$cat = '<li><a href="' . get_category_link( $typical_cat->term_id ) . '"><span aria-hidden="true">&#x270E;</span> ';
-		$cat .= $typical_cat->cat_name;
-		$cat .= '<sup>'. $typical_cat->category_count .'</sup>';
-		$cat .= '</a></li>';
-		echo $cat;
-	}
-	echo '</ul></nav>';
-}
 endif;
 
 if ( !function_exists( 'typical_comment' ) ) :
+
 // Template for comments and pingbacks
  
 	function typical_comment( $comment, $args, $depth ) {
@@ -87,14 +87,14 @@ if ( !function_exists( 'typical_comment' ) ) :
 				<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
 		</div>
 		<?php
-				break;
+			break;
 			case 'pingback'  :
 			case 'trackback' :
 		?>
 		<article <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
 			<p itemprop="commentText"><?php _e( 'Pingback:', 'typical' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __('(Edit)', 'typical'), ' ' ); ?></p>
 		<?php
-				break;
+			break;
 		endswitch;
 	}
 endif;
@@ -123,11 +123,12 @@ return $fields;
 }
 add_filter('comment_form_default_fields','typical_fields');
 
-/**
- * Register widgetized areas.
- */
+// Register widgetized areas.
+
 function typical_widgets_init() {
-	// located at the top of the sidebar.
+
+// located at the top of the sidebar
+
 	register_sidebar( array(
 		'name' => __( 'Primary Widget Area', 'typical' ),
 		'id' => 'primary-widget-area',
@@ -153,37 +154,37 @@ if ( ! function_exists( 'typical_posted_on' ) ) :
 
 // Prints HTML with meta information for the current post—date/time and author
 
-function typical_posted_on() {
-	printf( __( '<div>%2$s by %3$s', 'typical' ),
-		'meta-prep meta-prep-author',
-		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><time itemprop="datePublished" datetime="%3$s" pubdate><span aria-hidden="true">&#x274F;</span> %4$s</time></a>',
-			get_permalink(),
-			esc_attr( get_the_time() ),
-			get_the_date('Y-m-d'),
-			get_the_date()
-		),
-		sprintf( '<a href="%1$s" title="%2$s" rel="author" itemprop="author">%3$s</a>',
-			get_author_posts_url( get_the_author_meta( 'ID' ) ),
-			sprintf( esc_attr__( 'View all posts by %s', 'typical' ), get_the_author() ),
-			get_the_author()
-		)
-	);
+	function typical_posted_on() {
+		printf( __( '<div>%2$s by %3$s', 'typical' ),
+			'meta-prep meta-prep-author',
+			sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><time itemprop="datePublished" datetime="%3$s" pubdate><span aria-hidden="true">&#x274F;</span> %4$s</time></a>',
+				get_permalink(),
+				esc_attr( get_the_time() ),
+				get_the_date('Y-m-d'),
+				get_the_date()
+			),
+			sprintf( '<a href="%1$s" title="%2$s" rel="author" itemprop="author">%3$s</a>',
+				get_author_posts_url( get_the_author_meta( 'ID' ) ),
+				sprintf( esc_attr__( 'View all posts by %s', 'typical' ), get_the_author() ),
+				get_the_author()
+			)
+		);
 
-	if (is_single()) {
-	?>
-		<div>
-		<a rel="external" target="_blank" title="Post this article on Twitter" href="http://twitter.com/share?text=<?php the_title() ?>"><span aria-hidden="true">&#x275E;</span> <strong>Tweet this!</strong></a>
-		
-		<?php
-		$theURL = get_permalink();
-		$theTitle = get_the_title();
-		$theTitle = urlencode($theTitle);
+		if (is_single()) {
 		?>
-		<a rel="external" target="_blank" title="Save to read later with Instapaper.com" href="http://www.instapaper.com/hello2?url=<?php echo $theURL; ?>&title=<?php echo $theTitle; ?>"><span aria-hidden="true">&#x21B4;</span> <strong>Read later</strong></a>
+			<div>
+			<a rel="external" target="_blank" title="Post this article on Twitter" href="http://twitter.com/share?text=<?php the_title() ?>"><span aria-hidden="true">&#x275E;</span> <strong>Tweet this!</strong></a>
+			
+			<?php
+			$theURL = get_permalink();
+			$theTitle = get_the_title();
+			$theTitle = urlencode($theTitle);
+			?>
+			<a rel="external" target="_blank" title="Save to read later with Instapaper.com" href="http://www.instapaper.com/hello2?url=<?php echo $theURL; ?>&title=<?php echo $theTitle; ?>"><span aria-hidden="true">&#x21B4;</span> <strong>Read later</strong></a>
+			</div>
+		<?php } ?>
+		<div aria-hidden="true">&#x2014;</div>
 		</div>
-	<?php } ?>
-	<div aria-hidden="true">&#x2014;</div>
-	</div>
 	<?php }
 endif;
 
@@ -208,25 +209,25 @@ if ( ! function_exists( 'typical_posted_in' ) ) :
 
 // Prints HTML with meta information for the current post (category, tags and permalink)
 
-function typical_posted_in() {
-	// Retrieves tag list of current post, separated by commas.
-	$tag_list = get_the_tag_list( '<span itemprop="keywords">', '<sup aria-hidden="true">&#x25C6;</sup></span><span itemprop="keywords">','<sup aria-hidden="true">&#x25C6;</sup></span>');
-	if ( $tag_list ) {
-		$posted_in = __( 'This entry was posted in %1$s <span>%2$s</span>', 'typical' );
-	} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
-		$posted_in = __( 'This entry was posted in %1$s', 'typical' );
-	} else {
-		$posted_in = __( '', 'typical' );
+	function typical_posted_in() {
+		// Retrieves tag list of current post, separated by commas.
+		$tag_list = get_the_tag_list( '<span itemprop="keywords">', '<sup aria-hidden="true">&#x25C6;</sup></span><span itemprop="keywords">','<sup aria-hidden="true">&#x25C6;</sup></span>');
+		if ( $tag_list ) {
+			$posted_in = __( 'This entry was posted in %1$s <span>%2$s</span>', 'typical' );
+		} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
+			$posted_in = __( 'This entry was posted in %1$s', 'typical' );
+		} else {
+			$posted_in = __( '', 'typical' );
+		}
+		// Prints the string, replacing the placeholders.
+		printf(
+			$posted_in,
+			get_the_category_list( ', ' ),
+			$tag_list,
+			get_permalink(),
+			the_title_attribute( 'echo=0' )
+		);
 	}
-	// Prints the string, replacing the placeholders.
-	printf(
-		$posted_in,
-		get_the_category_list( ', ' ),
-		$tag_list,
-		get_permalink(),
-		the_title_attribute( 'echo=0' )
-	);
-}
 endif;
 
 // Place the itemprop="image" attribute on author images (belonging to Person schema)
@@ -287,6 +288,27 @@ if ( ! function_exists( 'typical_post_thumb_figure' ) ) :
 	<?php 
 	}
 endif; 
+
+// Posts pagination <nav>
+
+if ( ! function_exists( 'typical_pagination' ) ) : 
+	function typical_pagination() {	?>
+			<nav>
+				<?php 
+				if(get_previous_posts_link()) {
+					previous_posts_link( __( '<span aria-hidden="true">&#x2190;</span> Newer posts', 'typical' ) );
+				} else { ?>
+					<a rel="prev" href="#no"><span aria-hidden="true">&#x2190;</span> Newer posts</a>
+				<?php } 
+				if(get_next_posts_link()) {
+					next_posts_link( __( 'Older posts <span aria-hidden="true">&#x2192;</span>', 'typical' ) );
+				} else { ?>
+					<a rel="next" href="#no">Older posts <span aria-hidden="true">&#x2192;</span></a>
+		  <?php } ?>
+			</nav> 
+		<?php 
+	}
+endif;
 
 // Load CDN jquery:
 
