@@ -9,6 +9,7 @@
 add_action( 'after_setup_theme', 'typical_setup' );
 
 if ( !function_exists( 'typical_setup' ) ):
+
 // Sets up theme defaults and registers support for various WordPress features
 
 	function typical_setup() {
@@ -34,7 +35,9 @@ if ( !function_exists( 'typical_setup' ) ):
 }
 endif;
 
-if ( !function_exists('typical_menu') ):
+if ( !function_exists( 'typical_menu' ) ):
+
+// Combines pages and categories into a singular menu
 
 	function typical_menu() {
 		$typical_pages = get_pages();
@@ -76,8 +79,8 @@ if ( !function_exists( 'typical_comment' ) ) :
 					<?php printf( __( '%s', 'typical' ), sprintf( '%s', get_comment_author_link() ) );
 					/* translators: 1: date, 2: time */
 					?> 
-					<time itemprop="commentTime" datetime="<?php comment_date('Y-m-d'); ?>"><span aria-hidden="true">&#x274F;</span> 
-							<?php printf( __( '%1$s', 'typical' ), get_comment_date('d M Y')) ?>
+					<time itemprop="commentTime" datetime="<?php comment_date( 'Y-m-d' ); ?>"><span aria-hidden="true">&#x274F;</span> 
+							<?php printf( __( '%1$s', 'typical' ), get_comment_date( 'd M Y' )) ?>
 					</time>
 				</h4>
 			<?php if ( $comment->comment_approved == '0' ) : ?>
@@ -92,7 +95,7 @@ if ( !function_exists( 'typical_comment' ) ) :
 			case 'trackback' :
 		?>
 		<article <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
-			<p itemprop="commentText"><?php _e( 'Pingback:', 'typical' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __('(Edit)', 'typical'), ' ' ); ?></p>
+			<p itemprop="commentText"><?php _e( 'Pingback:', 'typical' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'typical' ), ' ' ); ?></p>
 		<?php
 			break;
 		endswitch;
@@ -112,16 +115,16 @@ $commenter = wp_get_current_commenter();
 $req = get_option( 'require_name_email' );
 $aria_req = ( $req ? " aria-required='true'" : '' );
 $fields =  array(
-	'author' => '<p><label for="author">' . __('Name', 'typical') . '</label> ' . ( $req ? '<span>*</span>' : '' ) .
+	'author' => '<p><label for="author">' . __( 'Name', 'typical' ) . '</label> ' . ( $req ? '<span>*</span>' : '' ) .
 	'<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . ' /></p>',
-	'email'  => '<p><label for="email">' . __('Email', 'typical') . '</label> ' . ( $req ? '<span>*</span>' : '' ) .
+	'email'  => '<p><label for="email">' . __( 'Email', 'typical' ) . '</label> ' . ( $req ? '<span>*</span>' : '' ) .
 	'<input id="email" name="email" type="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"' . $aria_req . ' /></p>',
-	'url'    => '<p><label for="url">' . __('Website', 'typical') . '</label>' .
+	'url'    => '<p><label for="url">' . __( 'Website', 'typical' ) . '</label>' .
 	'<input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" /></p>',
 );
 return $fields;
 }
-add_filter('comment_form_default_fields','typical_fields');
+add_filter( 'comment_form_default_fields','typical_fields' );
 
 // Register widgetized areas.
 
@@ -170,7 +173,7 @@ if ( ! function_exists( 'typical_posted_on' ) ) :
 			)
 		);
 
-		if (is_single()) {
+		if ( is_single() ) {
 		?>
 			<div>
 			<a rel="external" target="_blank" title="Post this article on Twitter" href="http://twitter.com/share?text=<?php the_title() ?>"><span aria-hidden="true">&#x275E;</span> <strong>Tweet this!</strong></a>
@@ -198,7 +201,7 @@ function typical_author_posted_on() {
 		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><time itemprop="datePublished" datetime="%3$s" pubdate><span aria-hidden="true">&#x274F;</span> %4$s</time></a> <div aria-hidden="true">&#x2014;</div>',
 			get_permalink(),
 			esc_attr( get_the_time() ),
-			get_the_date('Y-m-d'),
+			get_the_date( 'Y-m-d' ),
 			get_the_date()
 		)
 	);
@@ -211,7 +214,7 @@ if ( ! function_exists( 'typical_posted_in' ) ) :
 
 	function typical_posted_in() {
 		// Retrieves tag list of current post, separated by commas.
-		$tag_list = get_the_tag_list( '<span itemprop="keywords">', '<sup aria-hidden="true">&#x25C6;</sup></span><span itemprop="keywords">','<sup aria-hidden="true">&#x25C6;</sup></span>');
+		$tag_list = get_the_tag_list( '<span itemprop="keywords">', '<sup aria-hidden="true">&#x25C6;</sup></span><span itemprop="keywords">','<sup aria-hidden="true">&#x25C6;</sup></span>' );
 		if ( $tag_list ) {
 			$posted_in = __( 'This entry was posted in %1$s <span>%2$s</span>', 'typical' );
 		} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
@@ -232,12 +235,12 @@ endif;
 
 // Place the itemprop="image" attribute on author images (belonging to Person schema)
 
-function change_avatar_css($class) {
-$class = str_replace('class', 'itemprop="image" class', $class) ;
+function change_avatar_css( $class ) {
+$class = str_replace( 'class', 'itemprop="image" class', $class ) ;
 return $class;
 }
 
-add_filter('get_avatar','change_avatar_css');
+add_filter( 'get_avatar','change_avatar_css' );
 
 // Author info boxes using ARIA role="note"
 
@@ -280,7 +283,7 @@ endif;
 if ( ! function_exists( 'typical_post_thumb_figure' ) ) : 
 	function typical_post_thumb_figure() { ?>	
 	<figure>
-		<?php the_post_thumbnail('Typical Thumbnail'); ?>
+		<?php the_post_thumbnail( 'Typical Thumbnail' ); ?>
 		<figcaption>
 			<?php echo get_post( get_post_thumbnail_id() )->post_excerpt ?>
 		</figcaption>
@@ -291,16 +294,16 @@ endif;
 
 // Posts pagination <nav>
 
-if ( ! function_exists( 'typical_pagination' ) ) : 
+if ( !function_exists( 'typical_pagination' ) ) : 
 	function typical_pagination() {	?>
 			<nav>
 				<?php 
-				if(get_previous_posts_link()) {
+				if( get_previous_posts_link() ) {
 					previous_posts_link( __( '<span aria-hidden="true">&#x2190;</span> Newer posts', 'typical' ) );
 				} else { ?>
 					<a rel="prev" href="#no"><span aria-hidden="true">&#x2190;</span> Newer posts</a>
 				<?php } 
-				if(get_next_posts_link()) {
+				if( get_next_posts_link() ) {
 					next_posts_link( __( 'Older posts <span aria-hidden="true">&#x2192;</span>', 'typical' ) );
 				} else { ?>
 					<a rel="next" href="#no">Older posts <span aria-hidden="true">&#x2192;</span></a>
@@ -313,11 +316,11 @@ endif;
 // Load CDN jquery:
 
 function load_external_jQuery() {  
-	wp_deregister_script('jquery');
-	wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js');
-	wp_enqueue_script('jquery');
+	wp_deregister_script( 'jquery' );
+	wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js' );
+	wp_enqueue_script( 'jquery' );
 }  
-add_action('wp_enqueue_scripts', 'load_external_jQuery');
+add_action( 'wp_enqueue_scripts', 'load_external_jQuery' );
 
 // Add required comment-reply script
 
@@ -325,7 +328,7 @@ function theme_queue_js(){
 if ( (!is_admin()) && is_singular() && comments_open() && get_option('thread_comments') )
   wp_enqueue_script( 'comment-reply' );
 }
-add_action('wp_print_scripts', 'theme_queue_js');
+add_action( 'wp_print_scripts', 'theme_queue_js' );
 
 // Custom arrow glyphs in 'read more' links
 
@@ -333,7 +336,7 @@ function typical_more($more) {
     global $post;
 	return '&hellip; <a href="'. get_permalink($post->ID) . '" rel="bookmark" itemprop="url"> read more <span aria-hidden="true">&#x2192;</span></a>';
 }
-add_filter('excerpt_more', 'typical_more');
+add_filter( 'excerpt_more', 'typical_more' );
 
 // Add Twitter and Google+ / remove others
 
@@ -345,63 +348,63 @@ function my_new_contactmethods( $contactmethods ) {
 	unset($contactmethods['jabber']);
 	return $contactmethods;
 }
-add_filter('user_contactmethods','my_new_contactmethods',10,1);
+add_filter( 'user_contactmethods', 'my_new_contactmethods', 10, 1);
 
 // Add the Typical default avatar
 
-function typical_avatar($avatar_defaults) {
+function typical_avatar( $avatar_defaults ) {
 	$myavatar = get_stylesheet_directory_uri().'/images/avatar.png';
 	$avatar_defaults[$myavatar] = 'Typical Resolution Independent Default';
 	return $avatar_defaults;
 }
 
-add_filter('avatar_defaults', 'typical_avatar');
+add_filter( 'avatar_defaults', 'typical_avatar' );
 
 // Add a favicon
 
 function typical_favicon() { ?>
     <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/images/favicon.png" />
 <?php }
-add_action('wp_head', 'typical_favicon');
+add_action( 'wp_head', 'typical_favicon' );
 
 // THEME OPTIONS
 // Don't edit beyond this point unless you're really confident
 
-add_action('admin_menu', 'setup_theme_admin_menus');
+add_action( 'admin_menu', 'setup_theme_admin_menus' );
 
 function setup_theme_admin_menus() {  
-   add_theme_page('Typical Theme Options', 'Theme Options', 'edit_theme_options', 'typical-theme-options', 'typical_theme_options_page');
+   add_theme_page( 'Typical Theme Options', 'Theme Options', 'edit_theme_options', 'typical-theme-options', 'typical_theme_options_page' );
 }
 
 function typical_theme_options_page() {  
-    if (!current_user_can('manage_options')) {  
+    if ( !current_user_can('manage_options') ) {  
 		wp_die('<p>Sorry, my dear. You are not allowed to edit this particular page.</p>');  
 	} ?>
 	<div class="wrap">  
-		<?php screen_icon('themes'); ?> <h2>Theme Settings For Typical</h2>
+		<?php screen_icon( 'themes' ); ?> <h2>Theme Settings For Typical</h2>
 		<p class="top-notice">Typical includes the following settings. To reconfigure the theme further, consult the functions.php file where the PHP form for setting these options is included.</p>
 		<?php
 		
-		$fontface = get_option('font-face');
-		$introductoryTitle = get_option('introductory-title');
-		$introduction = get_option('introduction');
-		$logoImage = get_option('logo-image');
-		$footerText = get_option('footer-text');
-		$hideIcons = get_option('hide-icons');
+		$fontface = get_option( 'font-face' );
+		$introductoryTitle = get_option( 'introductory-title' );
+		$introduction = get_option( 'introduction' );
+		$logoImage = get_option( 'logo-image' );
+		$footerText = get_option( 'footer-text' );
+		$hideIcons = get_option( 'hide-icons' );
 		
 		if ( isset($_POST["update_settings"]) ) {
 			$fontface = $_POST["font-face"];
-			$introductoryTitle = htmlspecialchars($_POST["introductory-title"]);
-			$introductoryTitle = trim($introductoryTitle);
-			$introduction = trim($_POST["introduction"]);
-			$logoImage = isset($_POST["logo-image"]) ? $_POST["logo-image"] : null;
-			$hideIcons = isset($_POST["hide-icons"]) ? $_POST["hide-icons"] : null;
+			$introductoryTitle = htmlspecialchars( $_POST["introductory-title"] );
+			$introductoryTitle = trim( $introductoryTitle );
+			$introduction = trim( $_POST["introduction"] );
+			$logoImage = isset( $_POST["logo-image"]) ? $_POST["logo-image"] : null;
+			$hideIcons = isset( $_POST["hide-icons"]) ? $_POST["hide-icons"] : null;
 			
-			$footerText = trim($_POST["footer-text"]);
+			$footerText = trim( $_POST["footer-text"] );
 			$formErrors = array();
 			
-			$introduction = stripslashes($introduction);
-			$footerText = stripslashes($footerText);
+			$introduction = stripslashes( $introduction );
+			$footerText = stripslashes( $footerText );
 			
 			if ( !empty($formErrors) ) {
 				foreach($formErrors as $error) { ?>
@@ -563,7 +566,7 @@ function typical_theme_options_page() {
 	</div>
 <?php } 
 
-// Footnotes support. Incorporate's a modified version of nacin's Simple Footnotes plugin
+// Footnotes support. Incorporates a modified version of nacin's Simple Footnotes plugin
 // (http://wordpress.org/extend/plugins/simple-footnotes/)
 
 function load_footnote_support() {
@@ -659,11 +662,12 @@ function load_footnote_support() {
 			}
 	}
 
-add_action('after_setup_theme', 'load_footnote_support');
+add_action( 'after_setup_theme', 'load_footnote_support' );
 
 // Semantic shortcodes
 
 // Example usage: [blockquote quotation="Shortcodes are great!" author="Heydon Pickering" author_url="http://www.heydonworks.com"]
+
 function typical_blockquote( $atts ) {
 	extract( shortcode_atts( array(
 		'quotation' => 'I have nothing to say',
@@ -688,16 +692,17 @@ function typical_image_figure( $atts ) {
 add_shortcode( 'image_figure', 'typical_image_figure' );
 
 // Required for theme validation (a default media width)
+
 if ( ! isset( $content_width ) ) $content_width = 900;
 
 // Add rel attr to previous posts and next posts 
 
-function previous_posts_link_css($content) {
+function previous_posts_link_css( $content ) {
 	return 'rel="prev"';
 }
-add_filter('previous_posts_link_attributes', 'previous_posts_link_css' );
+add_filter( 'previous_posts_link_attributes', 'previous_posts_link_css' );
 
-function next_posts_link_css($content) {
+function next_posts_link_css( $content ) {
 	return 'rel="next"';
 }
-add_filter('next_posts_link_attributes', 'next_posts_link_css' );
+add_filter( 'next_posts_link_attributes', 'next_posts_link_css' );

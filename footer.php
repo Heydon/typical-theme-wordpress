@@ -41,7 +41,7 @@
 		?>
 			<p>
 				<span <?php echo $hideClass; ?>>
-					<small><a title="Powered by Wordpress" href="http://www.wordpress.org"><span aria-hidden="true">W</span></a> <i>Powered by Wordpress</i></small> 
+					<small><a title="Powered by Wordpress" href="http://www.wordpress.org"><span aria-hidden="true">W</span></a> <i>Powered by WordPress</i></small> 
 					<small><a title="Theme by Heydon Pickering" href="http://www.heydonworks.com"><span aria-hidden="true">&#x2622;</span> <i>Theme by Heydon Pickering</i></a></small> 
 				</span>
 					<small><a title="RSS Subscription" href="<?php bloginfo('rss2_url'); ?>"><span aria-hidden="true">R</span> <i>RSS Subscription</i></a></small>
