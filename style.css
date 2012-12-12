@@ -9,6 +9,12 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
+/**
+* 1.1 Reset
+* Reset and HTML5
+----------------------------------------------------------------------
+*/
+
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
@@ -44,8 +50,11 @@ table {
 
 input, select { vertical-align: middle }
 
-/* BASIC
-============================================================================ */
+/**
+* 1.2 Basic
+* Body and anchor styles
+----------------------------------------------------------------------
+*/
 
 body {
 font-size:137.5%;
@@ -58,7 +67,7 @@ line-height:1;
 }
 
 /* LINKS
-------------------------------- */
+--------------------- */
 
 a, a:visited {
 color:#006;
@@ -84,11 +93,16 @@ p small a:focus {
 border:0;
 }
 
-/* TYPE
-============================================================================ */
+/**
+* 1.3 Typography
+* Resources + flow and phrasing styles
+----------------------------------------------------------------------
+*/
 
-/* The custom icon font, made specially for the Typical Theme 
-(and featuring a few glyphs from http://www.fontsquirrel.com/fonts/Printers-Ornaments-One) */
+/* 
+* The custom icon font, made specially for the Typical Theme 
+* (and featuring a few glyphs from http://www.fontsquirrel.com/fonts/Printers-Ornaments-One) 
+*/
 
 @font-face {
 font-family: 'typical';
@@ -108,10 +122,6 @@ font-style: normal;
 	font-weight: normal !important;
 	speak: none;
 }
-
-
-
-
 
 p {
     line-height: 1.5;
@@ -153,7 +163,7 @@ p + p {
 }
 
 /* HEADINGS
-------------------------------------- */
+--------------------------- */
 
 h1, h2, h3, h4, hgroup {
     font-weight: 700;
@@ -179,7 +189,7 @@ h4 {
 }
 
 /* INLINE STYLES
-------------------------------------- */
+--------------------------- */
 
 strong, abbr {
     font-weight: 700;
@@ -251,7 +261,7 @@ kbd {
 }
 
 /* LISTS
-------------------------------------- */
+--------------------------- */
 
 li { list-style: none }
 
@@ -302,7 +312,7 @@ dd {
 }
 
 /* IMAGES
-------------------------------------- */
+--------------------------- */
 
 p > img {
     display: block;
@@ -313,7 +323,7 @@ p > img {
 }
 
 /* PAGE HEADER
-------------------------------------- */
+--------------------------- */
 
 header[role="banner"] {
     border-bottom: 4px solid;
@@ -374,7 +384,7 @@ header[role="banner"] hgroup, header[role="banner"] nav {
 }
 
 /* NAV
------------------ */
+------------------------- */
 
 nav { text-align: right }
 
@@ -408,7 +418,7 @@ nav sup {
 }
 
 /* PREV AND NEXT
---------------------- */
+---------------------------- */
 
 div > nav, section[role="main"] > nav {
     margin: -3em 0 1.5em;
@@ -443,7 +453,7 @@ a[href="#no"] {
 }
 
 /* ALLUSIONS
-------------------------------------- */
+------------------------- */
 
 blockquote {
     border-left: 0.5em solid;
@@ -460,8 +470,11 @@ blockquote p:before, q:before { content: '\201C' }
 
 blockquote p:after, q:after { content: '\201D' }
 
-/* ARTICLES
-============================================================================ */
+/**
+* 1.4 Articles
+* Article (post) styles
+----------------------------------------------------------------------
+*/
 
 div[itemprop="articleBody"] { padding-bottom: 1.5em }
 
@@ -649,10 +662,11 @@ article footer + div[aria-hidden="true"] {
     padding: 0;
 }
 
-/* AUTHORS
-============================================================================ */
-
-
+/**
+* 1.5 Authors
+* Author descriptions
+----------------------------------------------------------------------
+*/
 
 [role="note"] {
     background: #ededc6;
@@ -739,8 +753,11 @@ a[rel="tag"] { color: #111 }
     padding: 0.25em 0 0;
 }
 
-/* COMMENTS
-============================================================================ */
+/**
+* 1.6 Comments
+* Comment and comment form styles
+----------------------------------------------------------------------
+*/
 
 section[itemtype="http://schema.org/UserComments"] { padding-top: 1.5em }
 
@@ -851,8 +868,11 @@ nav.comment-pagination h2 {
     text-transform: none;
 }
 
-/* ARCHIVES
-============================================================================ */
+/**
+* 1.7 Archives
+* Archive and category
+----------------------------------------------------------------------
+*/
 
 .category section > h1 { text-indent: 0.8em }
 
@@ -897,10 +917,11 @@ li[itemprop="itemListElement"]:last-child > div {
     padding: 0;
 }
 
-/* ASIDES
-============================================================================ */
-
-
+/**
+* 1.8 Asides
+* Widget area / document footer styles
+----------------------------------------------------------------------
+*/
 
 aside > ul {
     padding: 1.5em 0;
@@ -944,8 +965,11 @@ body > aside a:link, body > aside a:visited { color: #339 }
 
 body > aside a:hover, body > aside a:active, body > aside a:focus { color: #006 }
 
-/* PAGES 
-============================================================================ */
+/**
+* 1.9 Pages
+* WordPress page styling
+----------------------------------------------------------------------
+*/
 
 article header h1 { font-size: 3em }
 
@@ -970,10 +994,11 @@ section[role="main"] h1 {
     padding: 0 0 1.5rem;
 }
 
-/* APPLICATION / FORM STYLES
-============================================================================ */
-
-
+/**
+* 2.0 Application / Form styles
+* Styles for anything that's interactive
+----------------------------------------------------------------------
+*/
 
 a[role="button"], a.post-edit-link, p input[type="submit"], #searchform input[type="submit"], a[aria-pressed="false"], a[onclick] {
     display: inline-block !important;
@@ -1055,11 +1080,11 @@ label {
     margin: 0 auto 0.5em;
 }
 
-/* BASIC LAYOUT
-============================================================================ */
-
-
-
+/**
+* 2.1 Layout
+* Document arrangement 
+----------------------------------------------------------------------
+*/
 body > div {
     padding: 3em 1.5em;
     max-width: 800px;
@@ -1105,8 +1130,11 @@ div[role="contentinfo"] p { padding: 0 0 0.25em }
 
 div[role="contentinfo"] small { display: inline-block }
 
-/* INTERNET EXPLORER
-============================================================================ */
+/**
+* 2.2 Internet Explorer
+* Exploiting the IE classes for better compliance
+----------------------------------------------------------------------
+*/
 
 .ie article header + p:first-letter, .ie div[itemprop="articleBody"] > p:first-child:first-letter {
     margin: 0.125em 0.5em 0 0;
@@ -1167,8 +1195,11 @@ div[role="contentinfo"] small { display: inline-block }
 
 .lt-ie8 article header { padding: 0 0 1.5em }
 
-/* BREAK POINTS
-============================================================================ */
+/**
+* 2.3 Break Points
+* Media queries to enhance elastic layout at certain viewport widths
+----------------------------------------------------------------------
+*/
 
 @media all and (max-width:1000px) { 
 
@@ -1334,8 +1365,11 @@ div[role="contentinfo"] small { display: inline-block }
     footer p { line-height: 1.25 }
 }
 
-/* WORDPRESS AND UTILITY STYLES
-============================================================================ */
+/**
+* 2.4 Utilities
+* Mandatory WordPress classes and other utility classes
+----------------------------------------------------------------------
+*/
 
 .sticky { /* for sticky posts */:  }
 
