@@ -6,11 +6,14 @@
  * @subpackage Typical
  */
 /** Tell WordPress to run typical_setup() when the 'after_setup_theme' hook is run. */
+
 add_action( 'after_setup_theme', 'typical_setup' );
 
 if ( !function_exists( 'typical_setup' ) ):
 
-// Sets up theme defaults and registers support for various WordPress features
+/**
+* Sets up theme defaults and registers support for various WordPress features
+*/
 
 	function typical_setup() {
 
@@ -37,7 +40,9 @@ endif;
 
 if ( !function_exists( 'typical_menu' ) ):
 
-// Combines pages and categories into a singular menu
+/**
+* Combines pages and categories into a singular menu
+*/
 
 	function typical_menu() {
 		$typical_pages = get_pages();
@@ -63,7 +68,9 @@ endif;
 
 if ( !function_exists( 'typical_comment' ) ) :
 
-// Template for comments and pingbacks
+/**
+* Template for comments and pingbacks
+*/
  
 	function typical_comment( $comment, $args, $depth ) {
 		$GLOBALS['comment'] = $comment;
@@ -102,13 +109,17 @@ if ( !function_exists( 'typical_comment' ) ) :
 	}
 endif;
 
-// Closes comments and pingbacks with </article> instead of </li>.
+/**
+* Closes comments and pingbacks with </article> instead of </li>
+*/
 
 function typical_comment_close() {
 	echo '</article>';
 }
 
-// Adjusts the comment_form() input types for HTML5.
+/**
+* Adjusts the comment_form() input types for HTML5
+*/
 
 function typical_fields($fields) {
 $commenter = wp_get_current_commenter();
@@ -124,13 +135,14 @@ $fields =  array(
 );
 return $fields;
 }
-add_filter( 'comment_form_default_fields','typical_fields' );
 
-// Register widgetized areas.
+add_filter( 'comment_form_default_fields','typical_fields' );
 
 function typical_widgets_init() {
 
-// located at the top of the sidebar
+/**
+* Register widgetized areas
+*/
 
 	register_sidebar( array(
 		'name' => __( 'Primary Widget Area', 'typical' ),
@@ -145,9 +157,11 @@ function typical_widgets_init() {
 
 // Register sidebars by running typical_widgets_init() on the widgets_init hook
 add_action( 'widgets_init', 'typical_widgets_init' );
+ 
+/**
+* Removes the default styles that are packaged with the Recent Comments widget
+*/
 
-
-// Removes the default styles that are packaged with the Recent Comments widget
 function typical_remove_recent_comments_style() {
 	add_filter( 'show_recent_comments_widget_style', '__return_false' );
 }
@@ -155,7 +169,9 @@ add_action( 'widgets_init', 'typical_remove_recent_comments_style' );
 
 if ( ! function_exists( 'typical_posted_on' ) ) :
 
-// Prints HTML with meta information for the current post—date/time and author
+/**
+* Prints HTML with meta information for the current post—date/time and author
+*/
 
 	function typical_posted_on() {
 		printf( __( '<div>%2$s by %3$s', 'typical' ),
@@ -172,7 +188,11 @@ if ( ! function_exists( 'typical_posted_on' ) ) :
 				get_the_author()
 			)
 		);
-
+		
+		/**
+		* Adds Twitter and Instapaper links
+		*/
+		
 		if ( is_single() ) {
 		?>
 			<div>
@@ -193,7 +213,9 @@ endif;
 
 if ( ! function_exists( 'typical_author_posted_on' ) ) :
 
-// Prints HTML with meta information for the current post—date/time and author.
+/**
+* Prints basic author and published date info
+*/
 
 function typical_author_posted_on() {
 	printf( __( '<div>Posted on %2$s', 'typical' ),
@@ -210,7 +232,9 @@ endif;
 
 if ( ! function_exists( 'typical_posted_in' ) ) :
 
-// Prints HTML with meta information for the current post (category, tags and permalink)
+/**
+* Prints HTML with meta information for the current post (category, tags and permalink)
+*/
 
 	function typical_posted_in() {
 		// Retrieves tag list of current post, separated by commas.
@@ -233,7 +257,9 @@ if ( ! function_exists( 'typical_posted_in' ) ) :
 	}
 endif;
 
-// Place the itemprop="image" attribute on author images (belonging to Person schema)
+/**
+* Place the itemprop="image" attribute on author images (belonging to Person schema)
+*/
 
 function change_avatar_css( $class ) {
 $class = str_replace( 'class', 'itemprop="image" class', $class ) ;
@@ -241,8 +267,10 @@ return $class;
 }
 
 add_filter( 'get_avatar','change_avatar_css' );
-
-// Author info boxes using ARIA role="note"
+ 
+/**
+* Author info boxes using ARIA role="note"
+*/
 
 if ( ! function_exists( 'typical_author_info' ) ) : 
 	function typical_author_info() { ?>
@@ -278,7 +306,10 @@ if ( ! function_exists( 'typical_author_info' ) ) :
 	}
 endif; 
 
-// HTML5 (<figure>) post thumbnails with caption support
+
+/**
+* HTML5 (<figure>) post thumbnails with caption support
+*/
 	
 if ( ! function_exists( 'typical_post_thumb_figure' ) ) : 
 	function typical_post_thumb_figure() { ?>	
@@ -292,9 +323,12 @@ if ( ! function_exists( 'typical_post_thumb_figure' ) ) :
 	}
 endif; 
 
-// Posts pagination <nav>
-
 if ( !function_exists( 'typical_pagination' ) ) : 
+
+/**
+* Posts pagination <nav> with inactive links faded out
+*/
+
 	function typical_pagination() {	?>
 			<nav>
 				<?php 
@@ -313,7 +347,23 @@ if ( !function_exists( 'typical_pagination' ) ) :
 	}
 endif;
 
-// Load CDN jquery:
+/**
+* Add rel attributes to post links
+*/ 
+
+function previous_posts_link_css( $content ) {
+	return 'rel="prev"';
+}
+add_filter( 'previous_posts_link_attributes', 'previous_posts_link_css' );
+
+function next_posts_link_css( $content ) {
+	return 'rel="next"';
+}
+add_filter( 'next_posts_link_attributes', 'next_posts_link_css' );
+
+/**
+* Load CDN jquery
+*/
 
 function load_external_jQuery() {  
 	wp_deregister_script( 'jquery' );
@@ -322,7 +372,9 @@ function load_external_jQuery() {
 }  
 add_action( 'wp_enqueue_scripts', 'load_external_jQuery' );
 
-// Add required comment-reply script
+/**
+* Add required comment-reply script
+*/
 
 function theme_queue_js(){
 if ( (!is_admin()) && is_singular() && comments_open() && get_option('thread_comments') )
@@ -330,7 +382,9 @@ if ( (!is_admin()) && is_singular() && comments_open() && get_option('thread_com
 }
 add_action( 'wp_print_scripts', 'theme_queue_js' );
 
-// Custom arrow glyphs in 'read more' links
+/**
+* Custom arrow glyphs in 'read more' links
+*/
 
 function typical_more($more) {
     global $post;
@@ -338,7 +392,9 @@ function typical_more($more) {
 }
 add_filter( 'excerpt_more', 'typical_more' );
 
-// Add Twitter and Google+ / remove others
+/**
+* Add Twitter and Google+ / remove others
+*/
 
 function my_new_contactmethods( $contactmethods ) {
 	$contactmethods['twitter'] = 'Twitter';
@@ -350,7 +406,9 @@ function my_new_contactmethods( $contactmethods ) {
 }
 add_filter( 'user_contactmethods', 'my_new_contactmethods', 10, 1);
 
-// Add the Typical default avatar
+/**
+* Add the Typical default avatar
+*/
 
 function typical_avatar( $avatar_defaults ) {
 	$myavatar = get_stylesheet_directory_uri().'/images/avatar.png';
@@ -360,15 +418,19 @@ function typical_avatar( $avatar_defaults ) {
 
 add_filter( 'avatar_defaults', 'typical_avatar' );
 
-// Add a favicon
+/**
+* Add a favicon
+*/
 
 function typical_favicon() { ?>
     <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/images/favicon.png" />
 <?php }
 add_action( 'wp_head', 'typical_favicon' );
 
-// THEME OPTIONS
-// Don't edit beyond this point unless you're really confident
+/**
+* Theme Options
+* Don't edit beyond this point unless you're really confident
+*/
 
 add_action( 'admin_menu', 'setup_theme_admin_menus' );
 
@@ -565,9 +627,11 @@ function typical_theme_options_page() {
 		
 	</div>
 <?php } 
-
-// Footnotes support. Incorporates a modified version of nacin's Simple Footnotes plugin
-// (http://wordpress.org/extend/plugins/simple-footnotes/)
+ 
+/**
+* Footnotes support. Incorporates a modified version of nacin's Simple Footnotes plugin
+* (http://wordpress.org/extend/plugins/simple-footnotes/)
+*/
 
 function load_footnote_support() {
 	if ( !class_exists('nacin_footnotes') ) {
@@ -664,7 +728,9 @@ function load_footnote_support() {
 
 add_action( 'after_setup_theme', 'load_footnote_support' );
 
-// Semantic shortcodes
+/**
+* Semantic shortcodes (figure and blockquote)
+*/
 
 // Example usage: [blockquote quotation="Shortcodes are great!" author="Heydon Pickering" author_url="http://www.heydonworks.com"]
 
@@ -689,20 +755,11 @@ function typical_image_figure( $atts ) {
 
 	return '<figure><img src="'.$image_url.'" alt="'.$alt.'" /><figcaption>'.$caption.'</figcaption></figure>';
 }
+
 add_shortcode( 'image_figure', 'typical_image_figure' );
 
-// Required for theme validation (a default media width)
+/**
+* Required for theme validation (a default media width)
+*/
 
 if ( ! isset( $content_width ) ) $content_width = 900;
-
-// Add rel attr to previous posts and next posts 
-
-function previous_posts_link_css( $content ) {
-	return 'rel="prev"';
-}
-add_filter( 'previous_posts_link_attributes', 'previous_posts_link_css' );
-
-function next_posts_link_css( $content ) {
-	return 'rel="next"';
-}
-add_filter( 'next_posts_link_attributes', 'next_posts_link_css' );
