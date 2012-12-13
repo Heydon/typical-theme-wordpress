@@ -15,9 +15,9 @@ get_header(); ?>
 	</h1>
 	
 	<?php
-		$tag_description = tag_description();
-		if ( ! empty( $tag_description ) )
-			echo apply_filters( 'tag_archive_meta', '<div role="note"><p>' . $tag_description . '</p></div>' );
+	$tag_description = tag_description();
+	if ( ! empty( $tag_description ) )
+		echo apply_filters( 'tag_archive_meta', '<div role="note"><p>' . $tag_description . '</p></div>' );
 	?>
 
 <?php
