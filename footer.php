@@ -31,13 +31,14 @@
 		
 		<?php
 		
-			// Hide footer credits if set to do so in Theme Options
-			
-			$hideClass = '';
-			$hide = get_option('hide-icons');
-			if ($hide != null) {
-				$hideClass = ' class="hide"';
-			}
+		// Hide footer credits if set to do so in Theme Options
+		
+		$hideClass = '';
+		$hide = get_option('hide-icons');
+		if ( $hide != null ) {
+			$hideClass = ' class="hide"';
+		}
+		
 		?>
 			<p>
 				<span <?php echo $hideClass; ?>>
@@ -51,8 +52,7 @@
 
 	</footer>
 
-<?php
-	wp_footer();
-?>
+<?php wp_footer(); ?>
+
 </body>
 </html>

@@ -3,8 +3,7 @@
  * The loop that displays a page.
  *
  * @package WordPress
- * @subpackage Starkers
- * @since Starkers HTML5 3.2
+ * @subpackage Typical
  */
 ?>
 

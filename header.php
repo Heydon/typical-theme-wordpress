@@ -72,7 +72,7 @@ if ( $customFav != null ) { ?>
 <body <?php body_class(); ?>>
 	<header role="banner">
 		<?php
-			$logo = get_option('logo-image');
+			$logo = get_option( 'logo-image' );
 			
 			if ( $logo != null ) { ?>
 				<hgroup>

@@ -3,8 +3,7 @@
  * The template for displaying all pages.
  *
  * @package WordPress
- * @subpackage Starkers
- * @since Starkers HTML5 3.0
+ * @subpackage Typical
  */
 
 get_header(); ?>

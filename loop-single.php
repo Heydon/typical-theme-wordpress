@@ -3,7 +3,7 @@
  * The loop that displays a single post.
  *
  * @package WordPress
- * @subpackage typical
+ * @subpackage Typical
  */
 ?>
 

@@ -8,16 +8,15 @@
  * located in the functions.php file.
  *
  * @package WordPress
- * @subpackage typical
- * @since typical HTML5 3.0
+ * @subpackage Typical
  */
 ?>
 
 <?php if ( post_password_required() ) : ?>
-				<p><?php _e( 'This post is password protected. Enter the password to view any comments.', 'typical' ); ?></p>
+	<p><?php _e( 'This post is password protected. Enter the password to view any comments.', 'typical' ); ?></p>
 <?php
-		return;
-	endif;
+	return;
+endif;
 ?>
 
 <?php

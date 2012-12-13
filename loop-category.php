@@ -3,7 +3,7 @@
  * The loop that displays category posts.
  *
  * @package WordPress
- * @subpackage typical
+ * @subpackage Typical
  */
 ?>
 

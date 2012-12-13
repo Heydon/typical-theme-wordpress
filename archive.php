@@ -3,8 +3,7 @@
  * The template for displaying Archive pages.
  *
  * @package WordPress
- * @subpackage typical
- * @since typical HTML5 3.0
+ * @subpackage Typical
  */
 
 get_header(); ?>
