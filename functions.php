@@ -419,15 +419,6 @@ function typical_avatar( $avatar_defaults ) {
 add_filter( 'avatar_defaults', 'typical_avatar' );
 
 /**
-* Add a favicon
-*/
-
-function typical_favicon() { ?>
-    <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/images/favicon.png" />
-<?php }
-add_action( 'wp_head', 'typical_favicon' );
-
-/**
 * Theme Options
 * Don't edit beyond this point unless you're really confident
 */
@@ -453,6 +444,7 @@ function typical_theme_options_page() {
 		$logoImage = get_option( 'logo-image' );
 		$footerText = get_option( 'footer-text' );
 		$hideIcons = get_option( 'hide-icons' );
+		$customFavicon = get_option( 'custom-favicon' );
 		
 		if ( isset($_POST["update_settings"]) ) {
 			$fontface = $_POST["font-face"];
@@ -461,6 +453,7 @@ function typical_theme_options_page() {
 			$introduction = trim( $_POST["introduction"] );
 			$logoImage = isset( $_POST["logo-image"]) ? $_POST["logo-image"] : null;
 			$hideIcons = isset( $_POST["hide-icons"]) ? $_POST["hide-icons"] : null;
+			$customFavicon = isset( $_POST["custom-favicon"]) ? $_POST["custom-favicon"] : null;
 			
 			$footerText = trim( $_POST["footer-text"] );
 			$formErrors = array();
@@ -484,6 +477,7 @@ function typical_theme_options_page() {
 				update_option('introductory-title', $introductoryTitle);
 				update_option('introduction', $introduction);
 				update_option('hide-icons', $hideIcons);
+				update_option('custom-favicon', $customFavicon);
 				update_option('footer-text', $footerText);
 				update_option('logo-image', $logoImage);
 			?>
@@ -545,6 +539,17 @@ function typical_theme_options_page() {
 					<td>  
 						<input type="checkbox" name="logo-image" id="logo-image" value="Yes" <?php if ( $logoImage != null ) { echo 'checked="checked"'; } ?> />
 						<span style="display:block" class="description">Check if you wish to use an image / logo for your site title.<br/> The text version of the name will be accessibly hidden. <br/>You must place the image in the theme's <strong>images</strong> folder and name it <strong>custom-logo.png</strong>.</span>
+					</td>
+				</tr>
+				<tr valign="top">  
+					<th scope="row">  
+						<label for="custom-favicon">  
+							Use a custom favicon?
+						</label>   
+					</th>  
+					<td>  
+						<input type="checkbox" name="custom-favicon" id="custom-favicon" value="Yes" <?php if ( $customFavicon != null ) { echo 'checked="checked"'; } ?> />
+						<span style="display:block" class="description">Should you wish to use a custom favicon, check this box and save the image as <strong>images/favicon.png</strong> in the theme folder, replacing the example file.</span>
 					</td>
 				</tr>
 				<tr valign="top">  

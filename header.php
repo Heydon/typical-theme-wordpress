@@ -54,6 +54,14 @@ if ( $fontfamily != null ) { ?>
 
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+
+<?php
+// Test if custom favicon is set in theme options and output <link> if so
+$customFav = get_option( 'custom-favicon' );
+if ( $customFav != null ) { ?>
+	<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/images/favicon.png" />
+<?php } ?>
+
  <!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/selectivizr-min.js"></script>
