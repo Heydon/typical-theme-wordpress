@@ -361,7 +361,6 @@ header[role="banner"] hgroup {
 
 hgroup h1 {
     text-transform: uppercase;
-    text-shadow: 1px 1px 0 #EDEDC6, 3px 3px 0 #111;
     letter-spacing: 1px;
     text-align: left;
 }
