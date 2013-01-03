@@ -1,6 +1,6 @@
 /*
 Theme Name: Typical
-Theme URI: http://typical-theme.heydonworks.com
+Theme URI: http://www.heydonworks.com
 Description: A resolution independent, microdata infused version of the Starkers HTML5 theme (http://nathanstaines.com)
 Version: 1.0
 Author: Heydon Pickering
@@ -363,6 +363,11 @@ hgroup h1 {
     text-transform: uppercase;
     letter-spacing: 1px;
     text-align: left;
+    text-shadow: 1px 1px 0 #fff, 2px 2px 0 #222, 3px 3px 0 #222;
+}
+
+hgroup h1 a {
+ 		letter-spacing: 1px !important; 
 }
 
 hgroup h1 span {
