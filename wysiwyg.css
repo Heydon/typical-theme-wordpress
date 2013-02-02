@@ -1,0 +1,1409 @@
+/*
+Theme Name: Typical
+Theme URI: http://www.heydonworks.com
+Description: A resolution independent, microdata infused version of the Starkers HTML5 theme (http://nathanstaines.com)
+Version: 1.0
+Author: Heydon Pickering
+Author URI: http://www.heydonworks.com
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: one-column, flexible-width, theme-options, threaded-comments, black, blue
+*/
+
+/**
+* 1.1 Reset
+* Reset and HTML5
+----------------------------------------------------------------------
+*/
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+body { line-height: 1 }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block }
+
+nav ul { list-style: none }
+
+blockquote, q { quotes: none }
+
+blockquote p:before, q:before { content: '\201C' }
+
+blockquote p:after, q:after { content: '\201D' }
+
+q { cursor: help }
+
+del { text-decoration: line-through }
+
+abbr[title], dfn[title] { cursor: help }
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+input, select { vertical-align: middle }
+
+/**
+* 1.2 Basic
+* Body and anchor styles
+----------------------------------------------------------------------
+*/
+
+body {
+font-size:137.5%;
+font-family:'Averia Serif Libre', serif;
+font-weight:400;
+padding:0.5em 0 0;
+color:#111;
+background:#ffe;
+line-height:1;
+}
+
+/* LINKS
+--------------------- */
+
+a, a:visited {
+color:#006;
+text-decoration:none;
+}
+
+a:hover, a:active, a:focus {
+color:#339;
+outline:0;
+}
+
+p a, article li a {
+border-bottom:1px solid;
+}
+
+p a:hover, p a:active, p a:focus,
+article li a:hover, article li a:active, article li a:focus,
+dl a:hover, dl a:active, dl a:focus {
+border-bottom:3px solid;
+}
+
+p small a:focus {
+border:0;
+}
+
+/**
+* 1.3 Typography
+* Resources + flow and phrasing styles
+----------------------------------------------------------------------
+*/
+
+/* 
+* The custom icon font, made specially for the Typical Theme 
+* (and featuring a few glyphs from http://www.fontsquirrel.com/fonts/Printers-Ornaments-One) 
+*/
+
+@font-face {
+font-family: 'typical';
+src: url('typical.eot');
+}
+
+@font-face {
+font-family: 'typical';
+src: url(data:font/truetype;charset=utf-8;base64,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PQEuASMOAQcGFRQWFRQGIyImJwYVFB4BHwE+Azc1NiYrASInNj8BPgE1NCYnMCcmND4CNTQnNTQzMhYzMjY1NC4CIwYVHAEVHgEVFAcGHgEXHgEyNjc+ATMyFjMWFRQGIyInIgcOAQcmLwEuATU0NjMyFRQGHQE6ATMyPgI1NC4CIyIOAhUuAzU0NjcyHgIzMjY3PgM3PgE3LgEjIgcGBw4BIyIjJg4BFRQWFxYyFwYHBhUUFhUGIyIuAicyNjMyFz4BNzU0Jy4BByMmIyIGARQWMzI2PQEuASMOATcUFxYXMj8BNDU0JiMiFxYXMzI1PgE1NCYjIgY3FBYyNic1LgEjIgYTFBYXIz4BNCYiBhYUFxYzOgEzPgE3JicmJw4BBxc1NxQWMzI1NCYjIgYTFBYzMjY1NCYjIgY3FB8BMB8BMj8BNjU0JiMiBjcUFjMyNjU8ATUnJiMiBhcUFjMyNjU0JiMiBlYCAgICFCIKDBIOBhIYGA4SEAQIBAoOLDQ6HAQSFg4OGgoCAgIGEA4MEgoGJjpIIgoYDAgKCg4IDhAODAggDA4GDAYgKAoCAgIgMh40GCIIFgYCCBAMFgogFjIaLh4CAgYGFCIaDAoMCAICBA4MHiwUGBQOCBAGEAwQGgwYDA4gNBQYChYMAgIGAhICQHYoBAgECAYUCCIuHgwKDAYWDhoMCgQWHh4IIBIiIgwyHDIiDBAQBiAoFhYSAgYWBAIQBAQEBAgCAhgmLBIiIiIgDhYOAgQCAiQ4QBwQHgwKCAICHiQSFAoEAgIEAgYEGg4IHggaDA4IBgQIBgYGBAgMCBwmKhYYMBgmOCQOBgoKBAwIBg4GDhYGBAQGBiAkCgwIGAoOGjoQEAYODgQGHBQSJgIEBBYWDBgMDBggEBwgSkIwBgIcDg4IBAIGCAQGJBYBAQwODAwIBgoGEhJGYGIaBhgUAgIEEhYICBQkCgYGCgICAgogHA4SEhAyUCAECAwICBgSGgwCBAIMGhIODhYaDB4mGggMKCYcDgwEBgoOEAYOBhwcEAoMCiQGBg4GCgoKChQkFhAeHDYmCgoEEgIIDA4UBAoSKiggBgQIBAQKDhQKBg4qLAZUYBImAQYUEhISCBwOBhJKBAoIEgwCEgoargQSCggGBhAKDgqiFBgWAgYQCg4SJBIQAg4eJBwMUgIGCgQCAgYMBAIICgoGCgIwWBIIHg4MDBJQDA4QHBoMDBS+AgYDAwYIDAgQBgwImBAMDhASDgQIDkYMChYWFAwMFgekDhAODgIeDhQwFggWFA4MBg4IAhoiEggCAgQEBAgQDgEBDA4WGAogSjwqFgoICgQCAgIMDA4YFhoSGhQGFAQGAgQKOkQmJCQ4UDQQHgwYEAwSBgoOCAIMGAgKFAgUHBAiEjZKNCA8HhQwKBoICAgCCAQGBAYsHg4aFhgOFhAGCAQKAgQCBgwIEAoEIl4wEiwECAQCCAQCCgwGAgICAiI4FAQEBCAyHBwaDAwEBgQIBAQMDggGBAIGAhIKICgeDhYQCgIUGg4EBAICBAIEGiIODAgWCgYCAgIICgYKBhggEAgICAgCDAIcPDAeEg4GGAwWCgoOFhIIBgYIGA4MDAwGCB4QHBQOCBIYEhQSFBQUFBYWFjQaGDAWECggFgQkOkYiGjIYECYOBAgGBgYQDggQCgYGBgYiIA4QDAoGBAQUGBgKEhIeCgQCBBIgChgYDhAOGAwSKAoEBAoOGhIGCgIQIDImAg4cBggMGgwYCh4sFAICBAwUHhQWEgYGBBwQJDgmFgIKAgQEDCwaFhQUJCAQBAYQBAQUAg4QHBwCAgg6JgoQIBIgDBAoFgwUDAIKEhgMDhYSDBgoMBgEFhocEA4gBAwMDAICCBYaJBgUIhYCAgIEBAYEAgwaHgwYCgQIDhQUDhAYEAIGEBoUAgIGFAwKCA4kMAIoBP6oEB4YEg4MCAQQhggICAQOCgQGCgw0EAYGBAwGCg4SbgwSFgwGCBAU/kYSDAYCDiISEtIOBggGDgoKBAQEAgoGBgIMCggYChASAXQMEhAWDBYcaAYECgEBAgYKCAYQEBAMGBIOAgYCDAgQoAoUEhYMDhYAEQBa//oHdgeyAC8AawBvAKQA0QD/ATsBXgGRAaEBpwGqAdsCGgJdAmAClwAAExQfARYzMjcVFAYVFBYzMjY/ATY3NTQmNTQ2NyIuAiMiBhUUFhciByYjIgYHDgETFBYXHgMXDgMVFB4CFzc0PgIzMhYzMjYzLgE1NDY/ATQmIyIOAgcuAScuAS8BJiciJiMiBxM2MxUTFBc/AT4BNx4BFx4BFz4BNzUvAS4BJzQ+Ajc0JyIGIyIuAiMOARUUHgIXBw4CFgcGExQWMzI2MxYXDgEVFBYzMjY/ATY3LgE1NDY9ASYvAS4B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) format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+[aria-hidden="true"] {
+	font-family: 'typical';
+	font-style: normal !important;
+	font-weight: normal !important;
+	speak: none;
+}
+
+p {
+    line-height: 1.5;
+    text-align: justify;
+}
+
+article p {
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+article * + *, section[role="note"] * + * { padding: 1.5rem 0 0 }
+
+article header *, footer * + * { padding: 0 }
+
+article p + p { padding: 0 }
+
+header { padding-top: 0 }
+
+pre { margin-top: 1.5em }
+
+p + blockquote {
+    padding: 0 0 0 1.5rem;
+    margin: 1.5em;
+}
+
+p + figure {
+    margin: 1.5em 0 0;
+    padding: 1.5em;
+}
+
+p + figure figcaption { max-width: 100% }
+
+p + p {
+    text-indent: 1.5em;
+    padding: 0;
+}
+
+/* HEADINGS
+--------------------------- */
+
+h1, h2, h3, h4, hgroup {
+    font-weight: 700;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+* + h1, * + h2, * + h3, * + h4, * + hgroup { padding-top: 1em }
+
+hgroup h1, hgroup h2 { padding: 0 1.5rem 0 0 }
+
+h1 { font-size: 3em }
+
+h2 { font-size: 2em }
+
+header > h2 { font-size: 2.5em }
+
+h3 { font-size: 1.5em }
+
+h4 {
+    font-size: 1.25em;
+    text-align: left;
+}
+
+/* INLINE STYLES
+--------------------------- */
+
+strong, abbr {
+    font-weight: 700;
+    font-size: 1.1em;
+    line-height: 1;
+}
+
+em, cite { font-style: italic }
+
+abbr { letter-spacing: 3px }
+
+abbr:after {
+    content: '(?)';
+    font-size: 0.5em;
+    vertical-align: top;
+    vertical-align: super;
+    line-height: 0;
+    font-family: serif;
+    letter-spacing: 0;
+}
+
+small {
+    line-height: 1;
+    font-size: 0.9em;
+}
+
+code, pre {
+    background: #eee;
+    color: #111;
+    padding: 0.25em;
+    font-family: 'courier new', courier, monospace;
+    font-size: 0.8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 1;
+}
+
+pre {
+    padding: 1.5em;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    overflow: hidden;
+}
+
+sup {
+    vertical-align: super;
+    line-height: 0;
+    font-size: 0.8em;
+}
+
+sub {
+    vertical-align: sub;
+    line-height: 0;
+    position: relative;
+    top: -5px;
+    font-size: 0.8em;
+}
+
+kbd {
+    font-family: 'Courier New', courier, monospace;
+    border: 2px solid;
+    padding: 0 0.25em;
+    border-radius: 0.125em;
+    box-shadow: 2px 2px 0px #222;
+    white-space: nowrap;
+    background: #ffe;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* LISTS
+--------------------------- */
+
+li { list-style: none }
+
+article ul li {
+    line-height: 1.5;
+    list-style: none;
+    padding: 0 1em 0.5em;
+    font-weight: bold;
+}
+
+article ul li:before {
+    font-family: 'typical';
+    content: '\2022';
+    padding: 0 0.5em 0 0;
+    font-weight: normal;
+}
+
+ol li {
+    list-style: decimal inside;
+    line-height: 1.5;
+}
+
+#footnotes { padding: 0 }
+
+#footnotes ol { font-size: 0.85em }
+
+#footnotes h4 { padding-top: 1em }
+
+dl {
+    line-height: 1.5;
+    padding: 3em 0 0;
+}
+
+dt {
+    font-style: italic;
+    display: inline-block;
+    width: 30%;
+    padding: 0 10% 0 0;
+    vertical-align: top;
+    padding: 0 0 1.5em;
+}
+
+dd {
+    display: inline-block;
+    vertical-align: top;
+    width: 68%;
+    padding: 0 0 1.5em;
+}
+
+/* IMAGES
+--------------------------- */
+
+p > img {
+    display: block;
+    margin: 0 auto;
+    padding: 1.5em 0;
+    max-width: 100%;
+    height: auto;
+}
+
+/* PAGE HEADER
+--------------------------- */
+
+header[role="banner"] {
+    border-bottom: 4px solid;
+    margin: 0 1.5em;
+    letter-spacing: -4px;
+}
+
+header[role="banner"] * { letter-spacing: normal }
+
+header[role="banner"] > div {
+    border: 1px solid #222;
+    margin: 0 0 4px;
+}
+
+header nav h1 {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+nav.prev-and-next h1 {
+    margin: 0;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+header[role="banner"] hgroup {
+    font-size: 0.66em;
+    padding: 0 0 1.5em;
+    text-align: left;
+}
+
+hgroup h1 {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: left;
+    text-shadow: 1px 1px 0 #fff, 2px 2px 0 #222, 3px 3px 0 #222;
+}
+
+hgroup h1 a {
+ 		letter-spacing: 1px !important; 
+}
+
+hgroup h1 span {
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+
+h1 img {
+    max-width: 500px;
+    height: auto;
+}
+
+hgroup h2 { text-align: left }
+
+header[role="banner"] hgroup, header[role="banner"] nav {
+    display: inline-block;
+    width: 49.8%;
+}
+
+/* NAV
+------------------------- */
+
+nav { text-align: right }
+
+nav li {
+    display: inline-block;
+    list-style: none;
+}
+
+nav li a:link, nav li a:visited {
+    display: inline-block;
+    background: #006;
+    padding: 0.25em 0.5em;
+    margin: 0 0 0.25em 0.25em;
+    color: #ffe;
+    border-radius: 0.25em;
+}
+
+nav ul + ul li a:link, nav ul + ul li a:visited { background: #111 }
+
+nav li a:hover, nav li a:active, nav li a:focus {
+    color: #ffe;
+    border: 0;
+    background: #339 !important;
+}
+
+nav sup {
+    font-size: 0.75em;
+    padding: 0 0 0 0.25em;
+    position: relative;
+    top: 0.1em;
+}
+
+/* PREV AND NEXT
+---------------------------- */
+
+div > nav, section[role="main"] > nav {
+    margin: -3em 0 1.5em;
+    position: relative;
+    height: 2em;
+}
+
+section[role="main"] > nav { margin: 1.5em 0 0 }
+
+div > nav a span, section[role="main"] > nav a span {
+    vertical-align: middle;
+    font-size: 2em;
+}
+
+section[role="main"] > nav a[rel="prev"], section[role="main"] > nav a[rel="next"], div > nav a[rel="prev"], div > nav a[rel="next"] {
+    position: absolute;
+    top: 0;
+    color: #006;
+}
+
+section[role="main"] > nav a[rel="prev"], div > nav a[rel="prev"] { z-index: 999 }
+
+div > nav a[rel="prev"]:hover, div > nav a[rel="next"]:hover, div > nav a[rel="prev"]:active, div > nav a[rel="next"]:active, div > nav a[rel="prev"]:focus, div > nav a[rel="next"]:focus, section[role="main"] > nav a[rel="prev"]:hover, section[role="main"] > nav a[rel="next"]:hover, section[role="main"] > nav a[rel="prev"]:active, section[role="main"] > nav a[rel="next"]:active, section[role="main"] > nav a[rel="prev"]:focus, section[role="main"] > nav a[rel="next"]:focus { color: #339 }
+
+nav a { left: 0 }
+
+nav a[rel="next"] { right: 0 }
+
+a[href="#no"] {
+    cursor: default;
+    color: #ededc6 !important;
+}
+
+/* ALLUSIONS
+------------------------- */
+
+blockquote {
+    border-left: 0.5em solid;
+    font-size: 1.25em;
+}
+
+blockquote p { font-style: italic }
+
+q { font-style: italic }
+
+blockquote footer:before { content: ' \2014' }
+
+blockquote p:before, q:before { content: '\201C' }
+
+blockquote p:after, q:after { content: '\201D' }
+
+/**
+* 1.4 Articles
+* Article (post) styles
+----------------------------------------------------------------------
+*/
+
+div[itemprop="articleBody"] { padding-bottom: 1.5em }
+
+article header + p:first-letter, div[itemprop="articleBody"] > p:first-child:first-letter {
+    font-size: 2.5em;
+    float: left;
+    padding: 0.125em;
+    margin: 0.125em 0.2em 0 0;
+    background: #111;
+    line-height: 0.8;
+    color: #ffe;
+    box-shadow: 2px 2px 0 #ffe, 5px 5px 0 #111;
+}
+
+article header > div {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+article header div div[aria-hidden="true"] {
+    font-size: 2.5em;
+    line-height: 0;
+    padding: 0 0 0.5em;
+}
+
+article header h2, article header h1 { padding: 0 !important }
+
+article header a[rel="external"] {
+    position: fixed;
+    top: 45%;
+    right: 0;
+    font-size: 0.8em;
+    background: #111;
+    color: #ffe;
+    border-radius: 0.25em 0 0 0.25em;
+    padding: 0.25em;
+    display: block;
+    margin: 0 0 0.25em;
+    width: 1.5em;
+    z-index: 999;
+}
+
+article header a[rel="external"] + a[rel="external"] { margin-top: 1.75em }
+
+article header a[rel="external"] strong {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    font-weight: normal;
+}
+
+article header a[rel="external"]:hover { width: auto }
+
+article header a[rel="external"]:hover strong { display: inline }
+
+article footer {
+    text-align: center;
+    border-style: solid;
+    border-width: 2px 0;
+    padding: 0.5em;
+}
+
+article blockquote footer {
+    border: 0;
+    padding: 0.5em 0 0;
+    margin: 0;
+    text-align: left;
+}
+
+article footer p {
+    font-size: 0.9em;
+    text-align: center;
+    text-indent: 0;
+}
+
+article footer p > span {
+    display: block;
+    font-size: 1.5em;
+    font-style: italic;
+}
+
+footer p span > span { white-space: nowrap }
+
+footer p span > span sup[aria-hidden="true"] {
+    font-size: 1.2em;
+    position: relative;
+    top: 0.3em;
+    left: -3px;
+}
+
+footer p > span[aria-hidden="true"] {
+    display: inline;
+    vertical-align: top;
+}
+
+article footer span span { font-style: normal }
+
+article footer p a { border: 0 }
+
+article footer span[aria-hidden="true"] {
+    font-size: 1.2em;
+    line-height: 1;
+    padding: 0 0.25em;
+}
+
+footer sup[aria-hidden="true"] {
+    font-size: 0.66em;
+    position: relative;
+    top: 0.25em;
+    padding: 0 0.33em 0 0.1em;
+}
+
+article + article { padding-top: 4.5em }
+
+article + article[itemprop="itemListElement"] { padding-top: 0 }
+
+time { white-space: nowrap }
+
+time span {
+    display: inline-block;
+    margin-right: -0.25em;
+    font-size: 0.9em;
+}
+
+a time { color: #111 }
+
+article img {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: 100%;
+    height: auto;
+}
+
+figure {
+    padding: 1.5em;
+    text-align: center;
+    border-style: solid;
+    border-width: 4px 0;
+}
+
+figure img {
+    display: inline-block;
+    max-width: 90%;
+}
+
+article header + figure {
+    float: right;
+    margin: 0 0 1.5em 1.5em;
+    position: relative;
+    top: 1.5em;
+    padding: 1em;
+    width: 30%;
+}
+
+article header + figure img {
+    width: 300px;
+    height: auto;
+}
+
+figcaption {
+    font-style: italic;
+    padding: 0.5em 0.5em 0;
+    display: block;
+}
+
+p a[rel="bookmark"] {
+    display: block;
+    border: 0;
+    text-align: center;
+    font-size: 1.25em;
+    padding: 0.75em 0;
+}
+
+p a[rel="bookmark"] span {
+    font-size: 1.5em;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+article footer + div[aria-hidden="true"] {
+    border: 2px solid #111;
+    margin: 4px 0 1.5em;
+    padding: 0;
+}
+
+/**
+* 1.5 Authors
+* Author descriptions
+----------------------------------------------------------------------
+*/
+
+[role="note"] {
+    background: #ededc6;
+    padding: 1.5em;
+    text-align: left;
+}
+
+.single [role="note"] { margin: 0 0 3em }
+
+[role="note"] h1 {
+    font-size: 2em;
+    text-align: left;
+}
+
+[role="note"] div {
+    display: inline-block;
+    vertical-align: top;
+}
+
+[role="note"] div { width: 19% }
+
+[role="note"] div  + div { width: 79% }
+
+[role="note"] p { text-align: left }
+
+[role="note"] figure {
+    padding: 0 !important;
+    margin-top: 0.25em;
+    border: 0;
+    text-align: left;
+}
+
+[role="note"] figure img {
+    width: 90%;
+    height: auto;
+}
+
+[role="note"] footer {
+    border: 0;
+    padding: 1em 0 0;
+    margin: 0;
+}
+
+[role="note"] footer small a {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    width: 32.5%;
+    border: 0;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0.5em;
+}
+
+footer small span[aria-hidden="true"] {
+    display: inline-block;
+    margin: 0 0.1em 0.1em 0;
+}
+
+[role="note"] footer p {
+    padding: 0;
+    text-align: center;
+}
+
+[role="note"] + article { padding-top: 3em }
+
+[role="note"] footer span[aria-hidden="true"] {
+    display: inline-block;
+    background: #111;
+    color: #ffe;
+    padding: 0.33em;
+    border-radius: 0.25em;
+    font-size: 1.5em;
+}
+
+a[rel="tag"] { color: #111 }
+
+[role="note"] footer i {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.25em 0 0;
+}
+
+/**
+* 1.6 Comments
+* Comment and comment form styles
+----------------------------------------------------------------------
+*/
+
+section[itemtype="http://schema.org/UserComments"] { padding-top: 1.5em }
+
+#respond {
+    background: #111;
+    color: #ffe;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 1.5em;
+    text-align: center;
+}
+
+h3#comments-title { padding-bottom: 1.5em }
+
+.comment-reply-link { display: block }
+
+h3#comments-title span {
+    display: block;
+    font-size: 4em;
+}
+
+h3#comments-title em {
+    display: block;
+    font-size: 1.5em;
+}
+
+#respond code {
+    white-space: normal;
+    color: #ffe;
+    background: transparent;
+}
+
+#respond textarea, #respond input {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+}
+
+p.logged-in-as {
+    background: #ededc6;
+    padding: 0.5em;
+    color: #111;
+    margin-top: 0.5em;
+}
+
+article[itemprop="comment"] {
+    position: relative;
+    min-height: 120px;
+    padding: 0 0 1.5em 120px;
+}
+
+article[itemprop="comment"] + article[itemprop="comment"] {
+    border-top: 2px solid #111;
+    padding-top: 1.5em;
+}
+
+article[itemprop="comment"] + article[itemprop="comment"] figure { top: 1.5em }
+
+article[itemprop="comment"] h4 { padding-top: 0 }
+
+article[itemprop="comment"] p + p {
+    text-indent: 0;
+    padding: 1em 0 0;
+}
+
+article[itemprop="comment"] figure {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100px;
+    padding: 0 !important;
+    border: 0;
+}
+
+article[itemprop="comment"] figure img {
+    height: auto;
+    max-width: 100%;
+    border: 2px solid #111;
+    padding: 3px;
+}
+
+div[itemprop="commentText"] {
+    display: inline-block;
+    padding-top: 0;
+}
+
+figure div[aria-hidden="true"] { font-size: 4.5em }
+
+.comment .comment { margin-top: 1.5em }
+
+div[itemprop="commentText"] a.comment-reply-link {
+    padding: 0.25em;
+    font-size: 1em;
+    margin: 0.5em 0 0;
+}
+
+nav.comment-pagination {
+    padding: 1.5em 0;
+    text-align: center;
+}
+
+nav.comment-pagination h2 {
+    font-size: 1.25em;
+    padding: 0 0 0.25em;
+    text-transform: none;
+}
+
+/**
+* 1.7 Archives
+* Archive and category
+----------------------------------------------------------------------
+*/
+
+.category section > h1 { text-indent: 0.8em }
+
+.tag div > h1 { text-indent: 1.25em }
+
+.tag h1 sup {
+    font-size: 1.25em;
+    position: relative;
+    left: -0.2em;
+    top: 0.2em;
+}
+
+li[itemprop="itemListElement"] { margin-bottom: 1.5em }
+
+li[itemprop="itemListElement"] h2 { padding: 0 }
+
+li[itemprop="itemListElement"] p {
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+li[itemprop="itemListElement"] a[rel="bookmark"] span[aria-hidden="true"] {
+    line-height: 0;
+    vertical-align: middle;
+    font-size: 1.25em;
+}
+
+h2 a[itemprop="url"] { font-size: 1em }
+
+li[itemprop="itemListElement"] > div {
+    padding-top: 1.5em;
+    border-bottom: 2px solid;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+li[itemprop="itemListElement"]:last-child { margin: 0 }
+
+li[itemprop="itemListElement"]:last-child > div {
+    border: 0;
+    padding: 0;
+}
+
+/**
+* 1.8 Asides
+* Widget area / document footer styles
+----------------------------------------------------------------------
+*/
+
+aside > ul {
+    padding: 1.5em 0;
+    text-align: center;
+    border-color: #ffe;
+    border-width: 2px 0;
+    border-style: solid;
+    outline: 4px solid #111;
+}
+
+aside li ul { padding: 0 }
+
+aside > ul > li {
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 0.75em;
+    width: 30%;
+    vertical-align: top;
+}
+
+aside li {
+    line-height: 1.25;
+    text-align: center;
+}
+
+aside > ul > li h3 {
+    padding: 0 0 0.25em;
+    color: #ffe;
+    line-height: 1;
+}
+
+body > aside {
+    background: #111;
+    color: #ffe;
+}
+
+body > aside a:link, body > aside a:visited { color: #339 }
+
+body > aside a:hover, body > aside a:active, body > aside a:focus { color: #006 }
+
+/**
+* 1.9 Pages
+* WordPress page styling
+----------------------------------------------------------------------
+*/
+
+article header h1 { font-size: 3em }
+
+div > h1 {
+    font-size: 2.25em;
+    text-transform: uppercase;
+    padding: 0 0 1em;
+}
+
+.search div > h1 { font-size: 2em }
+
+.search div > h1 em {
+    display: block;
+    text-transform: none;
+}
+
+section[role="note"] + section[role="main"] { padding-top: 3em }
+
+section[role="main"] h1 {
+    font-size: 1.5em !important;
+    text-transform: uppercase;
+    padding: 0 0 1.5rem;
+}
+
+/**
+* 2.0 Application / Form styles
+* Styles for anything that's interactive
+----------------------------------------------------------------------
+*/
+
+a[role="button"], a.post-edit-link, p input[type="submit"], #searchform input[type="submit"], a[aria-pressed="false"], a[onclick] {
+    display: inline-block !important;
+    background: #64AF57;
+    color: #ffe;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    border-color: #86ce7a !important;
+    border-radius: 0.25em;
+    box-shadow: 4px 4px 0 #497F3F;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+a.post-edit-link { font-size: 0.8em }
+
+a[role="button"], a.post-edit-link { padding: 0.25em 0.5em }
+
+a[role="button"]:hover, a.post-edit-link:hover, p input[type="submit"]:hover, #searchform input[type="submit"]:hover, a[onclick]:hover { border-width: 0 2px 2px 0 }
+
+a[role="button"]:active, a[role="button"]:focus, a.post-edit-link:active, a.post-edit-link:focus, p input[type="submit"]:focus, #searchform input[type="submit"]:focus, [aria-pressed="true"], a[onclick]:active, a[onclick]:focus {
+    border-width: 0 2px 2px 0;
+    box-shadow: 2px 2px 0 #528F47;
+    position: relative;
+    top: 2px;
+}
+
+output { font-family: 'lucida console', monospace }
+
+label {
+    display: inline-block;
+    line-height: 1;
+    padding: 0 0 0.25em;
+}
+
+input[type="text"], input[type="email"], input[type="url"], textarea, select {
+    padding: 0.25em;
+    font-family: inherit;
+    font-size: 1em;
+    display: block;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 2px solid #222;
+    outline: 2px solid #ffe;
+    box-shadow: inset 4px 4px 5px #CFC774;
+    margin: 0 0 1.5em;
+    max-width: 100%;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="url"]:focus, textarea:focus, select:focus {
+    border: 3px solid #222;
+    outline: 3px solid #ffe;
+}
+
+form p, form p code { text-align: center }
+
+form p + p {
+    text-indent: 0;
+    padding: 1em 0 0;
+}
+
+label {
+    font-size: 1.25em;
+    text-transform: uppercase;
+}
+
+[aria-required="true"]:after {
+    content: '*';
+    color: #cc0;
+}
+
+#searchform { text-align: center }
+
+#searchform input {
+    margin: 0 0 0.5em;
+    margin: 0 auto 0.5em;
+}
+
+/**
+* 2.1 Layout
+* Document arrangement 
+----------------------------------------------------------------------
+*/
+body > div {
+    padding: 3em 1.5em;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#wpadminbar {
+    max-width: 100%;
+    padding: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5em 0;
+}
+
+footer p {
+    text-align: center;
+    text-indent: 0;
+}
+
+body > footer a, body > footer a:visited { border: 0 }
+
+body > footer small a:hover, body > footer small a:active { border: 0 }
+
+footer small a span[aria-hidden="true"] {
+    font-size: 2em;
+    display: inline;
+    vertical-align: middle;
+}
+
+div[role="contentinfo"] i {
+    display: block;
+    height: 0;
+    width: 0;
+    margin: 0;
+    font-size: 0;
+    overflow: hidden;
+}
+
+div[role="contentinfo"] p { padding: 0 0 0.25em }
+
+div[role="contentinfo"] small { display: inline-block }
+
+/**
+* 2.2 Internet Explorer
+* Exploiting the IE classes for better compliance
+----------------------------------------------------------------------
+*/
+
+.ie article header + p:first-letter, .ie div[itemprop="articleBody"] > p:first-child:first-letter {
+    margin: 0.125em 0.5em 0 0;
+    line-height: 1;
+}
+
+.lt-ie8 article header + p:first-letter, .lt-ie8 div[itemprop="articleBody"] > p:first-child:first-letter { margin: 0 0.25em 0 0 }
+
+.lt-ie9 article header + figure { position: static }
+
+.lt-ie9 article header + figure img { width: auto }
+
+.lt-ie9 * + h1, .lt-ie9 * + h2, .lt-ie9 * + h3, .lt-ie9 * + h4, .lt-ie9 * + hgroup { padding-top: 1em }
+
+.lt-ie9 article footer { padding: 0.5em 0 }
+
+.lt-ie9 article header div div[aria-hidden="true"] { padding-bottom: 1em }
+
+.lt-ie9 p + blockquote {
+    padding: 0 0 0 1.5em;
+    margin: 1.5em;
+}
+
+.lt-ie9 h1 { padding-bottom: 0.5em }
+
+.lt-ie9 h2 { padding-bottom: 0.75em }
+
+.lt-ie9 h3 { padding-bottom: 0.6em }
+
+.lt-ie9 h4 { padding-bottom: 1.5em }
+
+.lt-ie9 pre {
+    margin-bottom: 1.875em;
+    padding: 1.5em;
+}
+
+.lt-ie9 section[role="main"] h1 { padding: 0 0 0.5em }
+
+.lt-ie9 hgroup h1 { padding: 0 0.5em 0 0 }
+
+.lt-ie9 hgroup h2 { padding: 0 0.75em 0 0 }
+
+.lt-ie9 li[itemprop="itemListElement"] > div { padding-top: 0.5em }
+
+.lt-ie8 dt, .lt-ie8 dd, .lt-ie8 header[role="banner"] hgroup, .lt-ie8 header[role="banner"] nav, .lt-ie8 nav li, .lt-ie8 nav li a:link, .lt-ie8 nav li a:visited, .lt-ie8 article header a[rel="external"] strong, .lt-ie8 time span, .lt-ie8 [role="note"] div, .lt-ie8 figcaption, .lt-ie8[role="note"] footer small a, .lt-ie8 footer small span[aria-hidden="true"], .lt-ie8 [role="note"] footer span[aria-hidden="true"], .lt-ie8 div[itemprop="commentText"], .lt-ie8 aside > ul > li, .lt-ie8 a[role="button"], .lt-ie8 a.post-edit-link, .lt-ie8 p input[type="submit"], .lt-ie8 #searchform input[type="submit"], .lt-ie8 a[aria-pressed="false"], .lt-ie8 label, .lt-ie8 div[role="contentinfo"] i, .lt-ie8 div[role="contentinfo"] small, .hide {
+    display: inline !important;
+    zoom: 1;
+}
+
+.lt-ie8 article li { list-style: disc inside }
+
+.lt-ie8 article header div div[aria-hidden="true"] {
+    padding-bottom: 0;
+    visibility: hidden;
+}
+
+.lt-ie8 time span { display: none !important }
+
+.lt-ie8 article header { padding: 0 0 1.5em }
+
+/**
+* 2.3 Break Points
+* Media queries to enhance elastic layout at certain viewport widths
+----------------------------------------------------------------------
+*/
+
+@media all and (max-width:1000px) { 
+
+    article header a[rel="external"] {
+        position: static;
+        display: inline-block;
+        background: none;
+        color: #111;
+        padding: 0;
+        width: auto;
+        font-size: 0.7em;
+        margin-top: 0 !important;
+    }
+
+    article header a[rel="external"]:hover { color: #339 }
+
+    article header a[rel="external"] strong, article header a[rel="external"]:hover strong, article header a[rel="external"]:active strong { display: inline }
+}
+
+@media all and (max-width:640px) { 
+
+    html { margin: 0 }
+
+    header[role="banner"] h1 { text-shadow: none }
+
+    article p, #comments p {
+        text-align: left;
+        -moz-hyphens: none;
+        -webkit-hyphens: none;
+        hyphens: none;
+    }
+
+    body > header, body > div, body > aside { font-size: 0.9em }
+
+    h1 { font-size: 2.5em !important }
+
+    h2 { font-size: 1.75em }
+
+    h3 { font-size: 1.25em }
+
+    h4 { font-size: 1em }
+
+    body > div {
+        padding: 1.5em 1em;
+        overflow: hidden;
+    }
+
+    header[role="banner"] { border: 0 }
+
+    div > h1 { font-size: 1.5em }
+
+    section[role="main"] h1 span { display: none }
+
+    section[role="main"] h1 span[aria-hidden="true"] { display: inline }
+
+    header[role="banner"] > div { display: none }
+
+    header[role="banner"] hgroup { width: 100% }
+
+    hgroup h1, hgroup h2 {
+        text-align: center;
+        padding: 0;
+    }
+
+    h1 img { max-width: 100% }
+
+    header nav[role="navigation"] {
+        width: 100% !important;
+        text-align: center !important;
+        display: block;
+    }
+
+    nav[role="navigation"] li, nav[role="navigation"] li a {
+        display: block;
+        margin: 0 auto 0.25em;
+    }
+
+    nav[role="navigation"] li a { padding: 0.33em 0 }
+
+    article header { font-size: 0.8em }
+
+    footer p span > span sup[aria-hidden="true"] {
+        padding: 0;
+        left: 0;
+        font-size: 1em;
+    }
+
+    div > nav { margin-top: -1.5em }
+
+    article header div div[aria-hidden="true"] { font-size: 2em }
+
+    .archive [itemscope] li { font-size: 0.7em }
+
+    aside > ul > li { width: 45% }
+
+    aside > ul > li h3 { font-size: 1.25em }
+
+    aside li ul li:last-child:after { content: '' }
+
+    blockquote { font-size: 1.125em }
+
+    article header + figure { width: 150px }
+
+    code { white-space: normal !important }
+
+    [role="note"] figure { text-align: left }
+
+    [role="note"] h1 { font-size: 1.5em !important }
+
+    article footer p > span { font-size: 1.33em }
+
+    span[itemprop="keywords"] { display: block }
+}
+
+@media all and (max-width:500px) { 
+
+    h1, h2, h3, h4, dt {
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
+    }
+
+    body > header, body > div, body > aside { font-size: 0.8em }
+
+    div > h1, section[role="main"] h1, [role="note"] h1 { font-size: 1.25em }
+
+    article header div { font-size: 1em }
+
+    article header + figure {
+        float: none;
+        width: auto;
+        margin: 0 0 1.5em;
+    }
+
+    [role="note"] div, [role="note"] p {
+        width: 100% !important;
+        padding: 0;
+    }
+
+    [role="note"] p { padding-top: 1.5em }
+
+    [role="note"] img { margin: 0 0 0.5em }
+
+    [role="note"] footer small a {
+        width: 100%;
+        font-size: 1.25em;
+    }
+
+    article header > div { font-size: 1.5em }
+
+    article[itemprop="comment"] { padding-left: 70px }
+
+    article[itemprop="comment"] figure {
+        width: 60px;
+        margin: 0.25em 0 0;
+    }
+
+    time { white-space: normal }
+
+    aside > ul > li { width: 100% }
+
+    footer p { line-height: 1.25 }
+}
+
+/**
+* 2.4 Utilities
+* Mandatory WordPress classes and other utility classes
+----------------------------------------------------------------------
+*/
+
+.sticky { /* for sticky posts */:  }
+
+.wp-caption, .wp-caption-text, .gallery-caption { font-style: italic }
+
+.bypostauthor { /* unique styles for post author comments */:  }
+
+.alignright {
+    float: right;
+    margin: 0 0 1.5em 1.5em;
+}
+
+.alignleft {
+    float: left;
+    margin: 0 1.5em 1.5em 0;
+}
+
+.aligncenter {
+    display: block;
+    margin: 1.5em auto;
+}
+
+.comment .comment { margin-top: 1.5em }
+
+.hide {
+    display: inline-block;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}

@@ -24,6 +24,6 @@ get_header();
 		<h1><span>&mdash;</span> Latest Articles <span>&mdash;</span></h1>
 		<?php get_template_part( 'loop', 'index' ); ?>
 	</section>
- 
+
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

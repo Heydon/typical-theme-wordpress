@@ -16,7 +16,10 @@ if ( !function_exists( 'typical_setup' ) ):
 */
 
 	function typical_setup() {
-
+	
+		// Editor stylesheet support
+		add_editor_style('wysiwyg.css');
+		
 		// This theme uses post thumbnails
 		add_theme_support( 'post-thumbnails' );
 		add_image_size( 'Typical Thumbnail', 600, 600, true );
