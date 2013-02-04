@@ -17,6 +17,10 @@ if ( !function_exists( 'typical_setup' ) ):
 
 	function typical_setup() {
 	
+		// Add background and header image support
+		add_theme_support( 'custom-header' );
+		add_theme_support( 'custom-background' );
+	
 		// Editor stylesheet support
 		add_editor_style('wysiwyg.css');
 		
