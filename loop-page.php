@@ -20,5 +20,8 @@
 						
 				<?php wp_link_pages( array( 'before' => '<nav>' . __( 'Pages:', 'typical' ), 'after' => '</nav>' ) ); ?>
 		</article>
+		<section id="comments" itemscope itemtype="http://schema.org/UserComments">
+			<?php comments_template( '', true ); ?>
+		</section>
 
 <?php endwhile; ?>

@@ -268,12 +268,12 @@ endif;
 * Place the itemprop="image" attribute on author images (belonging to Person schema)
 */
 
-function change_avatar_css( $class ) {
+function typical_change_avatar_css( $class ) {
 $class = str_replace( 'class', 'itemprop="image" class', $class ) ;
 return $class;
 }
 
-add_filter( 'get_avatar','change_avatar_css' );
+add_filter( 'get_avatar','typical_change_avatar_css' );
  
 /**
 * Author info boxes using ARIA role="note"
@@ -358,36 +358,36 @@ endif;
 * Add rel attributes to post links
 */ 
 
-function previous_posts_link_css( $content ) {
+function _typical_previous_posts_link_css( $content ) {
 	return 'rel="prev"';
 }
-add_filter( 'previous_posts_link_attributes', 'previous_posts_link_css' );
+add_filter( 'previous_posts_link_attributes', 'typical_previous_posts_link_css' );
 
-function next_posts_link_css( $content ) {
+function typical_next_posts_link_css( $content ) {
 	return 'rel="next"';
 }
-add_filter( 'next_posts_link_attributes', 'next_posts_link_css' );
+add_filter( 'next_posts_link_attributes', 'typical_next_posts_link_css' );
 
 /**
 * Load CDN jquery
 */
 
-function load_external_jQuery() {  
+function typical_load_external_jQuery() {  
 	wp_deregister_script( 'jquery' );
 	wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js' );
 	wp_enqueue_script( 'jquery' );
 }  
-add_action( 'wp_enqueue_scripts', 'load_external_jQuery' );
+add_action( 'wp_enqueue_scripts', 'typical_load_external_jQuery' );
 
 /**
 * Add required comment-reply script
 */
 
-function theme_queue_js(){
+function typical_theme_queue_js(){
 if ( (!is_admin()) && is_singular() && comments_open() && get_option('thread_comments') )
   wp_enqueue_script( 'comment-reply' );
 }
-add_action( 'wp_print_scripts', 'theme_queue_js' );
+add_action( 'wp_print_scripts', 'typical_theme_queue_js' );
 
 /**
 * Custom arrow glyphs in 'read more' links
@@ -403,7 +403,7 @@ add_filter( 'excerpt_more', 'typical_more' );
 * Add Twitter and Google+ / remove others
 */
 
-function my_new_contactmethods( $contactmethods ) {
+function typical_new_contactmethods( $contactmethods ) {
 	$contactmethods['twitter'] = 'Twitter';
 	$contactmethods['google'] = 'Google+';
 	unset($contactmethods['yim']);  
@@ -411,7 +411,7 @@ function my_new_contactmethods( $contactmethods ) {
 	unset($contactmethods['jabber']);
 	return $contactmethods;
 }
-add_filter( 'user_contactmethods', 'my_new_contactmethods', 10, 1);
+add_filter( 'user_contactmethods', 'typical_new_contactmethods', 10, 1);
 
 /**
 * Add the Typical default avatar
@@ -426,13 +426,58 @@ function typical_avatar( $avatar_defaults ) {
 add_filter( 'avatar_defaults', 'typical_avatar' );
 
 /**
-* Theme Options
-* Don't edit beyond this point unless you're really confident
+* Use custom favicon set in theme options or fallback
 */
 
-add_action( 'admin_menu', 'setup_theme_admin_menus' );
+function typical_favicon() {
+	$customFav = get_option( 'custom-favicon' );
+	if ( $customFav != null ) { ?>
+		<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/images/favicon.png" />
+<?php }
+}
 
-function setup_theme_admin_menus() {  
+add_action('wp_head', 'typical_favicon');
+
+/**
+* Load google web font family based on theme option
+*/
+
+function typical_load_google_fonts() {
+	$fontfamily = get_option( 'font-face' );
+	if ( $fontfamily != null ) {
+		wp_register_style('googleFonts', 'http://fonts.googleapis.com/css?family='.$fontfamily.':400,700,400italic');
+	} else {
+		wp_register_style('googleFonts', 'http://fonts.googleapis.com/css?family=Averia+Serif+Libre:400,700,400italic"');
+	}
+	wp_enqueue_style('googleFonts');
+}
+
+add_action('wp_print_styles', 'typical_load_google_fonts');
+
+if ( !function_exists( 'typical_body_font' ) ) :
+	
+	/**
+	* Set body font-family based on theme option (see above function)
+	*/
+	function typical_body_font() {
+		$fontfamily = get_option( 'font-face' );
+		if ( $fontfamily != null ) { ?>
+			<style type="text/css">
+				body {
+					font-family: '<?php echo str_replace( '+', ' ', $fontfamily ) ?>', serif !important;
+				}
+			</style>
+		<?php }
+	}
+endif;
+
+/**
+* Theme Options
+*/
+
+add_action( 'admin_menu', 'typical_setup_theme_admin_menus' );
+
+function typical_setup_theme_admin_menus() {  
    add_theme_page( 'Typical Theme Options', 'Theme Options', 'edit_theme_options', 'typical-theme-options', 'typical_theme_options_page' );
 }
 
@@ -645,18 +690,18 @@ function typical_theme_options_page() {
 * (http://wordpress.org/extend/plugins/simple-footnotes/)
 */
 
-function load_footnote_support() {
+function typical_load_footnote_support() {
 	if ( !class_exists('nacin_footnotes') ) {
         /*
 		 * Author: Andrew Nacin
 		 * Author URI: http://andrewnacin.com/
 		 */
-		class nacin_footnotes {
+		class typical_nacin_footnotes {
 				var $footnotes = array();
 				var $option_name = 'simple_footnotes';
 				var $db_version = 1;
 				var $placement = 'content';
-				function nacin_footnotes() {
+				function typical_nacin_footnotes() {
 						add_shortcode( 'ref', array( &$this, 'shortcode' ) );
 						$this->options = get_option( 'simple_footnotes' );
 						if ( ! empty( $this->options ) )
@@ -734,11 +779,11 @@ function load_footnote_support() {
 						return $content;
 				}
 		}
-		new nacin_footnotes();
+		new typical_nacin_footnotes();
 			}
 	}
 
-add_action( 'after_setup_theme', 'load_footnote_support' );
+add_action( 'after_setup_theme', 'typical_load_footnote_support' );
 
 /**
 * Semantic shortcodes (figure and blockquote)

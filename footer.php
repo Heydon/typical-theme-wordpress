@@ -22,7 +22,7 @@
 		} else { ?>
 			<p>You have been reading 
 				<em>
-					<a href="<?php echo home_url( '/' ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+					<a href="<?php echo $home_url_escaped; ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
 						<?php bloginfo( 'name' ); ?>
 					</a>
 				</em>

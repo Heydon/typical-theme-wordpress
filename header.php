@@ -32,41 +32,15 @@
 
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<?php 
-
-// Set up Google font family and call resources
-
-$fontfamily = get_option( 'font-face' );
-if ( $fontfamily != null ) { ?>
-	<link href='http://fonts.googleapis.com/css?family=<?php echo $fontfamily ?>:400,700,400italic' rel='stylesheet' type='text/css'>
-	<style type="text/css">
-		body {
-			font-family: '<?php echo str_replace( '+', ' ', $fontfamily ) ?>', serif !important;
-		}
-	</style>
-<?php 
-} else { 
-?>
-	<link href="http://fonts.googleapis.com/css?family=Averia+Serif+Libre:400,700,400italic" rel="stylesheet" type="text/css">
-<?php 
-} ?>
-
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-
-<?php
-// Test if custom favicon is set in theme options and output <link> if so
-$customFav = get_option( 'custom-favicon' );
-if ( $customFav != null ) { ?>
-	<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/images/favicon.png" />
-<?php } ?>
 
  <!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/selectivizr-min.js"></script>
  <![endif]-->
 <?php wp_head(); ?>
+<?php typical_body_font(); ?>
 </head>
  
 <body <?php body_class(); ?>>
@@ -74,14 +48,17 @@ if ( $customFav != null ) { ?>
 		<?php
 			$logo = get_option( 'logo-image' );
 			
-			if ( $logo != null ) { ?>
+			if ( $logo != null ) { 
+				$home_url = home_url( '/' );
+				$home_url_escaped = esc_url($home_url);
+				?>
 				<hgroup>
-					<h1 class="with-image"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><span><?php bloginfo( 'name' ); ?></span><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/custom-logo.png" alt="" /></a></h1>
+					<h1 class="with-image"><a href="<?php echo $home_url_escaped; ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><span><?php bloginfo( 'name' ); ?></span><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/custom-logo.png" alt="" /></a></h1>
 					<h2><?php bloginfo( 'description' ); ?></h2>
 				</hgroup>
 			<?php } else { ?>
 				<hgroup>
-					<h1><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+					<h1><a href="<?php echo $home_url_escaped; ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 					<h2><?php bloginfo( 'description' ); ?></h2>
 				</hgroup>			
 			<?php } ?>
