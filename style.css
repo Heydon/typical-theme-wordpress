@@ -1005,7 +1005,7 @@ section[role="main"] h1 {
 ----------------------------------------------------------------------
 */
 
-a[role="button"], a.post-edit-link, p input[type="submit"], #searchform input[type="submit"], a[aria-pressed="false"], a[onclick] {
+a[role="button"], p input[type="submit"], #searchform input[type="submit"], a[aria-pressed="false"], a[onclick] {
     display: inline-block !important;
     background: #64AF57;
     color: #ffe;
@@ -1020,13 +1020,11 @@ a[role="button"], a.post-edit-link, p input[type="submit"], #searchform input[ty
     line-height: 1;
 }
 
-a.post-edit-link { font-size: 0.8em }
+a[role="button"] { padding: 0.25em 0.5em }
 
-a[role="button"], a.post-edit-link { padding: 0.25em 0.5em }
+a[role="button"]:hover, p input[type="submit"]:hover, #searchform input[type="submit"]:hover, a[onclick]:hover { border-width: 0 2px 2px 0 }
 
-a[role="button"]:hover, a.post-edit-link:hover, p input[type="submit"]:hover, #searchform input[type="submit"]:hover, a[onclick]:hover { border-width: 0 2px 2px 0 }
-
-a[role="button"]:active, a[role="button"]:focus, a.post-edit-link:active, a.post-edit-link:focus, p input[type="submit"]:focus, #searchform input[type="submit"]:focus, [aria-pressed="true"], a[onclick]:active, a[onclick]:focus {
+a[role="button"]:active, a[role="button"]:focus, p input[type="submit"]:focus, #searchform input[type="submit"]:focus, [aria-pressed="true"], a[onclick]:active, a[onclick]:focus {
     border-width: 0 2px 2px 0;
     box-shadow: 2px 2px 0 #528F47;
     position: relative;
